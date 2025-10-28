@@ -1,0 +1,27 @@
+{
+  "name": "HMOIndex",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@nuxt/eslint": "^1.9.0",
+    "@nuxt/eslint-config": "^1.9.0",
+    "@nuxtjs/color-mode": "^3.5.2",
+    "eslint": "^9.38.0",
+    "nuxt": "^4.2.0",
+    "vue": "^3.5.22",
+    "vue-router": "^4.6.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.9.1",
+    "eslint-plugin-format": "^1.0.2",
+    "modern-css-reset": "^1.4.0",
+    "typescript": "^5.9.3"
+  }
+}
