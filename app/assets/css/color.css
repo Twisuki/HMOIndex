@@ -1,0 +1,44 @@
+:root {
+  --primary: #0ea5e9;
+  --secondary: #84cc16;
+
+  --text: #000000b2;
+  --text-dark: #000000cc;
+  --text-darker: #000000;
+  --text-light: #00000099;
+  --text-lighter: #0000007f;
+  --text-inverted: #ffffff;
+
+  --bg: #ffffff;
+  --bg-light: #ffffffcc;
+  --bg-gray: #f5f5f5;
+  --bg-dark: #ededed;
+
+  --border: #000000;
+  --shadow: #0000001a;
+}
+
+.dark {
+  --primary: #38bdf8;
+  --secondary: #bef264;
+
+  --text: #ffffffea;
+  --text-dark: #fffffff4;
+  --text-darker: #ffffff;
+  --text-light: #ffffffc6;
+  --text-lighter: #ffffff99;
+  --text-inverted: #000000;
+
+  --bg: #0f1724;
+  --bg-light: #0f1724cc;
+  --bg-gray: #0b1220;
+  --bg-dark: #071024;
+
+  --border: #ffffff;
+  --shadow: #ffffff1a;
+}
+
+body {
+  color: var(--text);
+  background: var(--bg);
+}
