@@ -3,20 +3,31 @@
 </script>
 
 <template>
-  <div class="container">
-    <BaseNavbar />
-    <div class="content">
-      <slot />
+  <div class="app">
+    <BaseBackground />
+
+    <div class="container">
+      <div class="content">
+        <slot />
+      </div>
     </div>
-    <BaseFooter />
   </div>
 </template>
 
 <style scoped>
+.app {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  color: var(--text);
+}
+
 .container {
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  z-index: 100;
 }
 
 .content {

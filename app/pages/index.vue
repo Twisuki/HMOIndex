@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div>
+  <div class="page">
     index
   </div>
 </template>
