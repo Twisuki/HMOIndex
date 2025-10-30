@@ -41,7 +41,7 @@ const items = computed<NavbarItem[]>(() => [
 ])
 
 onMounted(() => {
-  mediaQuery = window.matchMedia("(min-width: 1025px)")
+  mediaQuery = window.matchMedia("(min-width: 769px)")
   isDesktop.value = mediaQuery.matches
   mediaQuery.addEventListener("change", handleMediaChange)
 
@@ -74,7 +74,6 @@ const handleMediaChange = (e: MediaQueryListEvent) => {
 .navbar-container {
   position: relative;
   width: 100%;
-  height: 4rem;
   display: flex;
   align-items: center;
   justify-content: center;
