@@ -1,6 +1,7 @@
 @import "modern-css-reset";
 
 :root {
+  /* color */
   --bg: #2b2b2c;
   --bg-light: #565658;
   --bg-decoration: #69696a;
@@ -9,4 +10,57 @@
   --text-light: #ffffff;
   --text-focus: #5cdfff;
   --text-primary: #15c969;
+
+  /* layout */
+  --max-width: 100%;
+  --padding-x: 0.5rem;
+  --padding-y: 0.75rem;
+}
+
+@media (min-width: 420px) {
+  :root {
+    --max-width: 100%;
+    --padding-x: 0.5rem;
+    --padding-y: 0.75rem;
+  }
+}
+
+@media (min-width: 640px) {
+  :root {
+    --max-width: 100%;
+    --padding-x: 1rem;
+    --padding-y: 0.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --max-width: 100%;
+    --padding-x: 1.5rem;
+    --padding-y: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --max-width: 100%;
+    --padding-x: 2rem;
+    --padding-y: 1rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --max-width: 1280px;
+    --padding-x: 2.5rem;
+    --padding-y: 1.25rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  :root {
+    --max-width: 1280px;
+    --padding-x: 3rem;
+    --padding-y: 1.5rem;
+  }
 }

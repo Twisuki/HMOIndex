@@ -7,6 +7,7 @@
     <BaseBackground />
 
     <div class="container">
+      <BaseNavbar />
       <div class="content">
         <slot />
       </div>
@@ -27,10 +28,13 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
   z-index: 100;
 }
 
 .content {
   flex: 1;
+  position: relative;
+  width: var(--max-width);
 }
 </style>
