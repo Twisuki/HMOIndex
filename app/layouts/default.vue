@@ -36,5 +36,6 @@
   flex: 1;
   position: relative;
   width: var(--max-width);
+  padding-top: var(--padding-y);
 }
 </style>

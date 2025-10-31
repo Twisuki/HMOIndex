@@ -167,7 +167,7 @@ const toggleNav = () => {
     bottom: 0;
     transform: translateY(50%);
     z-index: 200;
-    background-color: var(--bg-light);
+    background-color: var(--text);
     transition: all 0.1s ease;
   }
 
