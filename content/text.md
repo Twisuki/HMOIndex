@@ -10,7 +10,6 @@ console.log('Code block')
 }
 ```
 
-
 `code`
 
 `const code: string = 'highlighted code inline'`{lang="ts"}
