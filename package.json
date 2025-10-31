@@ -10,9 +10,11 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/content": "^3.8.0",
     "@nuxt/eslint": "^1.9.0",
     "@nuxt/eslint-config": "^1.9.0",
     "@nuxtjs/color-mode": "^3.5.2",
+    "better-sqlite3": "^12.4.1",
     "eslint": "^9.38.0",
     "nuxt": "^4.2.0",
     "vue": "^3.5.22",
