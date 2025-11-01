@@ -21,7 +21,7 @@ onMounted(() => {
       }
     },
     {
-      threshold: props.scroll ?? 0.5,
+      threshold: (props.scroll && props.scroll >= 0 && props.scroll < 1) ? props.scroll : 0.5,
     },
   )
 

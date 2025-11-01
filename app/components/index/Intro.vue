@@ -31,7 +31,7 @@ const buttonItems: ButtonItem[] = [
 
 <template>
   <IndexSection
-    :scroll="1"
+    :scroll="0.75"
     classname="intro-container"
     card
   >
