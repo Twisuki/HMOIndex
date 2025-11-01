@@ -8,10 +8,6 @@
     <IndexIntro />
     <IndexServer />
     <IndexDynamic />
-
-    <p>
-      Server Section 与 Dynamic Section 顺序待定.
-    </p>
   </div>
 </template>
 
