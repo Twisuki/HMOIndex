@@ -22,27 +22,6 @@ const serverItems: ServerCard[] = [
     to: "/server",
   },
 ]
-
-const currentIndex = ref(0)
-let timer: number | null = null
-const interval = 5000
-
-const startAutoPlay = () => {
-  timer = window.setInterval(() => {
-    currentIndex.value = (currentIndex.value + 1) % serverItems.length
-  }, interval)
-}
-
-onMounted(() => {
-  startAutoPlay()
-})
-
-onBeforeUnmount(() => {
-  if (timer) {
-    clearInterval(timer)
-    timer = null
-  }
-})
 </script>
 
 <template>
@@ -50,40 +29,37 @@ onBeforeUnmount(() => {
     classname="server-container"
     card
   >
-    <template #default="{ scrolled }">
+    <BaseCarousel
+      :interval="5000"
+      classname="server-carousel"
+    >
       <div
-        class="server"
-        :class="{ scrolled }"
+        v-for="(item, index) in serverItems"
+        :key="index"
+        class="server-card"
+        :style="{
+          backgroundImage: `url(${item.cover})`,
+        }"
       >
-        <div
-          v-for="(item, index) in serverItems"
-          :key="index"
-          class="server-card"
-          :class="{ shown: index === currentIndex }"
-          :style="{
-            backgroundImage: `url(${item.cover})`,
-          }"
-        >
-          <div class="text">
-            <div class="title">
-              {{ item.title }}
-            </div>
-            <div class="intro">
-              {{ item.intro }}
-            </div>
-            <a
-              :href="item.to"
-              class="button"
-            >
-              <span>
-                详细介绍
-                <i class="fa-solid fa-arrow-right" />
-              </span>
-            </a>
+        <div class="text">
+          <div class="title">
+            {{ item.title }}
           </div>
+          <div class="intro">
+            {{ item.intro }}
+          </div>
+          <a
+            :href="item.to"
+            class="button"
+          >
+            <span>
+              详细介绍
+              <i class="fa-solid fa-arrow-right" />
+            </span>
+          </a>
         </div>
       </div>
-    </template>
+    </BaseCarousel>
   </IndexSection>
 </template>
 
@@ -95,10 +71,10 @@ onBeforeUnmount(() => {
   align-items: center;
 }
 
-.server {
-  position: relative;
+.server-carousel {
   width: 100%;
   aspect-ratio: 16 / 9;
+  position: relative;
 }
 
 .server-card {
@@ -107,12 +83,9 @@ onBeforeUnmount(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: none;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  opacity: 0;
-  transition: opacity 2s ease;
 
   & .text {
     position: absolute;
@@ -158,10 +131,6 @@ onBeforeUnmount(() => {
         transform: scale(1.1) skew(-20deg);
       }
     }
-  }
-
-  &.shown {
-    opacity: 1;
   }
 }
 
