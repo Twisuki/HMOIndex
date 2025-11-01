@@ -38,31 +38,9 @@ const buttonItems: ButtonItem[] = [
     <template #default="{ scrolled }">
       <div class="intro">
         <div class="text">
-          我们是
+          我们是 {{ scrolled }}
           <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis est expedita harum, illum in nostrum
-            quis? Deserunt fugiat, maxime nostrum odio repellendus reprehenderit tenetur voluptatem! Molestiae nam natus
-            perferendis quas!
-          </div>
-          <div>
-            Assumenda beatae consectetur delectus, deleniti doloribus dolorum et eum ex exercitationem fugit inventore
-            laudantium mollitia nobis odio placeat provident quasi qui quisquam quod repudiandae rerum sapiente, similique
-            suscipit totam voluptatibus.
-          </div>
-          <div>
-            Atque doloribus facilis, maxime minima modi non obcaecati odit optio praesentium quae qui quibusdam ut
-            veritatis voluptas voluptatibus! Ad asperiores blanditiis dolores esse harum itaque labore odit placeat quas
-            voluptas?
-          </div>
-          <div>
-            Alias aliquid cupiditate debitis dolorem expedita illo illum modi non obcaecati possimus. Earum eum
-            excepturi facilis harum id incidunt laboriosam magni molestiae nesciunt nihil, perferendis quod reprehenderit
-            veniam voluptate voluptates!
-          </div>
-          <div>
-            Consequuntur cupiditate, deleniti doloremque eum inventore nam perferendis praesentium ratione, recusandae
-            repellendus saepe totam voluptatibus. Consequatur doloremque eligendi est magni nulla, odio optio perspiciatis
-            quae recusandae reiciendis repellat soluta voluptates.
+            湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.湖南大学岳麓幻境社.
           </div>
         </div>
 
