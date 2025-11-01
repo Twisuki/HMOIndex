@@ -136,10 +136,12 @@ const toggleNav = () => {
   gap: 4px;
   background-color: var(--bg-cover);
   z-index: 100;
-  transition: all 0.3s ease;
+  pointer-events: none;
   opacity: 0;
+  transition: all 0.5s ease;
 
   &.shown {
+    pointer-events: auto;
     top: 3rem;
     transform: translateY(0);
     opacity: 1;
@@ -156,7 +158,6 @@ const toggleNav = () => {
   color: var(--text);
   font-weight: 600;
   text-decoration: none;
-  transition: color 0.3s;
 
   &::after {
     content: "";
@@ -168,7 +169,6 @@ const toggleNav = () => {
     transform: translateY(50%);
     z-index: 200;
     background-color: var(--text);
-    transition: all 0.1s ease;
   }
 
   &.active {
