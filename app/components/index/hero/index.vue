@@ -1,36 +1,18 @@
 <script setup lang="ts">
-const isLoaded = ref(false)
-const isDesktop = ref(false)
-let mediaQuery: MediaQueryList
 
-onMounted(() => {
-  mediaQuery = window.matchMedia("(min-width: 769px)")
-  isDesktop.value = mediaQuery.matches
-  mediaQuery.addEventListener("change", handleMediaChange)
-
-  isLoaded.value = true
-})
-
-onBeforeUnmount(() => {
-  mediaQuery.removeEventListener("change", handleMediaChange)
-})
-
-const handleMediaChange = (e: MediaQueryListEvent) => {
-  isDesktop.value = e.matches
-}
 </script>
 
 <template>
   <IndexSection classname="hero-container">
     <template #default="{ scrolled }">
-      <IndexHeroDesktop
-        v-if="isDesktop && isLoaded"
-        :scrolled
-      />
-      <IndexHeroTablet
-        v-if="!isDesktop && isLoaded"
-        :scrolled
-      />
+      <BaseResponsive :breakpoints="640">
+        <template #desktop>
+          <IndexHeroDesktop :scrolled />
+        </template>
+        <template #tablet>
+          <IndexHeroTablet :scrolled />
+        </template>
+      </BaseResponsive>
     </template>
   </IndexSection>
 </template>

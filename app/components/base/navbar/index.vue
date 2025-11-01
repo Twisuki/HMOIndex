@@ -7,11 +7,6 @@ export interface NavbarItem {
 }
 
 const route = useRoute()
-
-const isLoaded = ref(false)
-const isDesktop = ref(false)
-let mediaQuery: MediaQueryList
-
 const items = computed<NavbarItem[]>(() => [
   {
     label: "主页",
@@ -39,34 +34,18 @@ const items = computed<NavbarItem[]>(() => [
     active: route.path.startsWith("/resource"),
   },
 ])
-
-onMounted(() => {
-  mediaQuery = window.matchMedia("(min-width: 769px)")
-  isDesktop.value = mediaQuery.matches
-  mediaQuery.addEventListener("change", handleMediaChange)
-
-  isLoaded.value = true
-})
-
-onBeforeUnmount(() => {
-  mediaQuery.removeEventListener("change", handleMediaChange)
-})
-
-const handleMediaChange = (e: MediaQueryListEvent) => {
-  isDesktop.value = e.matches
-}
 </script>
 
 <template>
   <div class="navbar-container">
-    <BaseNavbarDesktop
-      v-if="isDesktop && isLoaded"
-      :items="items"
-    />
-    <BaseNavbarTablet
-      v-if="!isDesktop && isLoaded"
-      :items="items"
-    />
+    <BaseResponsive>
+      <template #desktop>
+        <BaseNavbarDesktop :items />
+      </template>
+      <template #tablet>
+        <BaseNavbarTablet :items />
+      </template>
+    </BaseResponsive>
   </div>
 </template>
 
