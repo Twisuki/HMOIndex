@@ -35,7 +35,7 @@ defineProps<{ scrolled: boolean }>()
   position: absolute;
   right: var(--padding-y);
   bottom: var(--padding-y);
-  padding: var(--padding-y) var(--padding-y);
+  padding: var(--padding-y);
   border: 4px solid var(--text);
   text-align: right;
 

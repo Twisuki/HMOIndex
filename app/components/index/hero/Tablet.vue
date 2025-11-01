@@ -39,7 +39,7 @@ defineProps<{ scrolled: boolean }>()
 .text {
   width: 100%;
   margin-top: var(--padding-y);
-  padding: var(--padding-y) var(--padding-y);
+  padding: var(--padding-y);
   text-align: center;
 
   & .title {
