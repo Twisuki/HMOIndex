@@ -1,10 +1,11 @@
 <script setup lang="ts">
 interface SectionProps {
+  scroll?: number
   card?: boolean
   classname?: string | string[] | Record<string, boolean>
 }
 
-defineProps<SectionProps>()
+const props = defineProps<SectionProps>()
 
 const scrolled = ref(false)
 const sectionRef = ref<HTMLElement | null>(null)
@@ -20,7 +21,7 @@ onMounted(() => {
       }
     },
     {
-      threshold: 0.5,
+      threshold: props.scroll ?? 0.5,
     },
   )
 
