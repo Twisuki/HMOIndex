@@ -53,14 +53,25 @@ let timer: number | null = null
 const interval = 5000
 
 const startAutoPlay = () => {
+  stopAutoPlay()
+
   timer = window.setInterval(() => {
     currentIndex.value = (currentIndex.value + 1) % totalIndex
   }, interval)
 }
 
+const stopAutoPlay = () => {
+  if (timer) {
+    clearInterval(timer)
+    timer = null
+  }
+}
+
 const setIndex = (index: number) => {
   if (index >= 0 && index < totalIndex) {
+    stopAutoPlay()
     currentIndex.value = index
+    startAutoPlay()
   }
 }
 
@@ -69,10 +80,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-  if (timer) {
-    clearInterval(timer)
-    timer = null
-  }
+  stopAutoPlay()
 })
 </script>
 
@@ -81,49 +89,44 @@ onBeforeUnmount(() => {
     classname="server-container"
     card
   >
-    <template #default="{ scrolled }">
+    <div class="server">
       <div
-        class="server"
-        :class="{ scrolled }"
+        v-for="(item, index) in serverItems"
+        :key="index"
+        class="server-card"
+        :class="{ shown: index === currentIndex }"
+        :style="{
+          backgroundImage: `url(${item.cover})`,
+        }"
       >
-        <div
-          v-for="(item, index) in serverItems"
-          :key="index"
-          class="server-card"
-          :class="{ shown: index === currentIndex }"
-          :style="{
-            backgroundImage: `url(${item.cover})`,
-          }"
-        >
-          <div class="text">
-            <div class="title">
-              {{ item.title }}
-            </div>
-            <div class="intro">
-              {{ item.intro }}
-            </div>
-            <a
-              :href="item.to"
-              class="button"
-            >
-              <span>
-                详细介绍
-                <i class="fa-solid fa-arrow-right" />
-              </span>
-            </a>
+        <div class="text">
+          <div class="title">
+            {{ item.title }}
           </div>
+          <div class="intro">
+            {{ item.intro }}
+          </div>
+          <a
+            :href="item.to"
+            class="button"
+          >
+            <span>
+              详细介绍
+              <i class="fa-solid fa-arrow-right" />
+            </span>
+          </a>
         </div>
       </div>
-      <div class="line-container">
-        <div
-          v-for="index in totalIndex"
-          :key="index"
-          class="line"
-          :class="{ active: currentIndex === index - 1 }"
-          @click="setIndex(index - 1)"
-        />
-      </div>
-    </template>
+    </div>
+    <div class="line-container">
+      <div
+        v-for="index in totalIndex"
+        :key="index"
+        class="line"
+        :class="{ active: currentIndex === index - 1 }"
+        @click="setIndex(index - 1)"
+      />
+    </div>
   </BaseSection>
 </template>
 
