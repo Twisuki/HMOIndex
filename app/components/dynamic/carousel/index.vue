@@ -1,5 +1,5 @@
 <script setup lang="ts">
-interface Item {
+export interface Item {
   title: string
   description: string
   date: string
@@ -22,70 +22,18 @@ const items = computed<Item[]>(() =>
     cover,
   })) || [],
 )
-
-const currentIndex = ref(0)
-const totalIndex = items.value.length
-let timer: number | null = null
-const interval = 5000
-
-const startAutoPlay = () => {
-  stopAutoPlay()
-
-  timer = window.setInterval(() => {
-    currentIndex.value = (currentIndex.value + 1) % totalIndex
-  }, interval)
-}
-
-const stopAutoPlay = () => {
-  if (timer) {
-    clearInterval(timer)
-    timer = null
-  }
-}
-
-const setIndex = (index: number) => {
-  if (index >= 0 && index < totalIndex) {
-    stopAutoPlay()
-    currentIndex.value = index
-    startAutoPlay()
-  }
-}
-
-onMounted(() => {
-  startAutoPlay()
-})
-
-onBeforeUnmount(() => {
-  stopAutoPlay()
-})
 </script>
 
 <template>
   <BaseSection class="carousel-container">
-    <div
-      class="carousel"
-      :style="{ backgroundImage: `url(${items[currentIndex]?.cover})` }"
-    >
-      <div class="item-container">
-        <div
-          v-for="(item, index) in items"
-          :key="index"
-          class="item"
-          :class="{ active: currentIndex === index }"
-          @click="setIndex(index)"
-        >
-          <div class="title">
-            {{ item.title }}
-          </div>
-          <div class="description">
-            {{ item.description }}
-          </div>
-          <div class="date">
-            {{ item.date }}
-          </div>
-        </div>
-      </div>
-    </div>
+    <BaseResponsive :breakpoints="640">
+      <template #desktop>
+        <DynamicCarouselDesktop :items />
+      </template>
+      <template #tablet>
+        <DynamicCarouselTablet :items />
+      </template>
+    </BaseResponsive>
   </BaseSection>
 </template>
 
@@ -112,11 +60,9 @@ onBeforeUnmount(() => {
   width: 30%;
   height: 100%;
   margin-left: auto;
-  padding: 0.5rem 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.5rem;
 }
 
 .item {
@@ -142,6 +88,21 @@ onBeforeUnmount(() => {
 
   &.active {
     background-color: var(--bg-decoration);
+  }
+}
+
+@media (max-width: 1024px) {
+  .item-container {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .item .description {
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 </style>
