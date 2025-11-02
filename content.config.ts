@@ -7,6 +7,7 @@ export default defineContentConfig({
       source: "dynamic/*.md",
       schema: z.object({
         date: z.string(),
+        index: z.number(),
         cover: z.string(),
         author: z.string(),
       }),

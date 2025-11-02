@@ -2,8 +2,6 @@
 useHead({
   title: "动态 | HMO - Minecraft岳麓幻境社",
 })
-
-const { data: home } = await useAsyncData(() => queryCollection("dynamic").all())
 </script>
 
 <template>

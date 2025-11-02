@@ -83,10 +83,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <BaseSection
-    classname="server-container"
-    card
-  >
+  <BaseSection classname="server-container">
     <div class="server">
       <div
         v-for="(item, index) in serverItems"
