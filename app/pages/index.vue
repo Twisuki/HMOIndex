@@ -1,5 +1,7 @@
 <script setup lang="ts">
-
+useHead({
+  title: "首页 | HMO - Minecraft岳麓幻境社",
+})
 </script>
 
 <template>
