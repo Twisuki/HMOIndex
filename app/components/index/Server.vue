@@ -173,6 +173,7 @@ onBeforeUnmount(() => {
     }
 
     & .intro {
+      font-size: var(--font-size);
       text-indent: 2em;
       overflow-wrap: anywhere;
     }
@@ -189,6 +190,7 @@ onBeforeUnmount(() => {
       transition: all 0.3s ease;
 
       & span {
+        font-size: var(--font-size);
         transform: skew(20deg);
         color: var(--text-light);
       }
@@ -244,10 +246,6 @@ onBeforeUnmount(() => {
     gap: 0;
     border-radius: 0;
 
-    & .intro {
-      font-size: 0.75rem;
-    }
-
     & .button {
       width: 75%;
     }
@@ -257,10 +255,6 @@ onBeforeUnmount(() => {
 @media (max-width: 420px) {
   .server-card .text {
     width: 75%;
-
-    & .button span {
-      font-size: 0.75rem;
-    }
   }
 
   .line-container {

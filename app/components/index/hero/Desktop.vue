@@ -49,6 +49,7 @@ defineProps<{ scrolled: boolean }>()
   }
 
   & .subline {
+    font-size: var(--font-size);
     margin-top: var(--padding-y);
     cursor: pointer;
     transform: translateX(50%);

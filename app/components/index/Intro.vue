@@ -84,6 +84,7 @@ const buttonItems: ButtonItem[] = [
 
 .text {
   text-align: center;
+  font-size: var(--font-size);
 }
 
 .button {
@@ -96,9 +97,9 @@ const buttonItems: ButtonItem[] = [
 
 .button-item {
   flex: 1;
-  height: 3rem;
+  font-size: var(--font-size);
+  padding: var(--padding-y) 0;
   transform: skew(-20deg) translateY(50%);
-  background-color: blue;
   display: flex;
   justify-content: center;
   align-items: center;
