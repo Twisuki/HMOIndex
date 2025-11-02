@@ -22,6 +22,34 @@ const serverItems: ServerCard[] = [
     to: "/server",
   },
 ]
+
+const currentIndex = ref(0)
+const totalIndex = serverItems.length
+let timer: number | null = null
+const interval = 5000
+
+const startAutoPlay = () => {
+  timer = window.setInterval(() => {
+    currentIndex.value = (currentIndex.value + 1) % totalIndex
+  }, interval)
+}
+
+const setIndex = (index: number) => {
+  if (index >= 0 && index < totalIndex) {
+    currentIndex.value = index
+  }
+}
+
+onMounted(() => {
+  startAutoPlay()
+})
+
+onBeforeUnmount(() => {
+  if (timer) {
+    clearInterval(timer)
+    timer = null
+  }
+})
 </script>
 
 <template>
@@ -29,37 +57,49 @@ const serverItems: ServerCard[] = [
     classname="server-container"
     card
   >
-    <BaseCarousel
-      :interval="5000"
-      classname="server-carousel"
-    >
+    <template #default="{ scrolled }">
       <div
-        v-for="(item, index) in serverItems"
-        :key="index"
-        class="server-card"
-        :style="{
-          backgroundImage: `url(${item.cover})`,
-        }"
+        class="server"
+        :class="{ scrolled }"
       >
-        <div class="text">
-          <div class="title">
-            {{ item.title }}
+        <div
+          v-for="(item, index) in serverItems"
+          :key="index"
+          class="server-card"
+          :class="{ shown: index === currentIndex }"
+          :style="{
+            backgroundImage: `url(${item.cover})`,
+          }"
+        >
+          <div class="text">
+            <div class="title">
+              {{ item.title }}
+            </div>
+            <div class="intro">
+              {{ item.intro }}
+            </div>
+            <a
+              :href="item.to"
+              class="button"
+            >
+              <span>
+                详细介绍
+                <i class="fa-solid fa-arrow-right" />
+              </span>
+            </a>
           </div>
-          <div class="intro">
-            {{ item.intro }}
-          </div>
-          <a
-            :href="item.to"
-            class="button"
-          >
-            <span>
-              详细介绍
-              <i class="fa-solid fa-arrow-right" />
-            </span>
-          </a>
         </div>
       </div>
-    </BaseCarousel>
+      <div class="line-container">
+        <div
+          v-for="index in totalIndex"
+          :key="index"
+          class="line"
+          :class="{ active: currentIndex === index - 1 }"
+          @click="setIndex(index - 1)"
+        />
+      </div>
+    </template>
   </IndexSection>
 </template>
 
@@ -67,14 +107,15 @@ const serverItems: ServerCard[] = [
 .server-container {
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.server-carousel {
+.server {
+  position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  position: relative;
 }
 
 .server-card {
@@ -83,9 +124,12 @@ const serverItems: ServerCard[] = [
   left: 0;
   width: 100%;
   height: 100%;
+  background-image: none;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  opacity: 0;
+  transition: opacity 2s ease;
 
   & .text {
     position: absolute;
@@ -132,6 +176,31 @@ const serverItems: ServerCard[] = [
       }
     }
   }
+
+  &.shown {
+    opacity: 1;
+  }
+}
+
+.line-container {
+  width: 100%;
+  display: flex;
+  padding-top: 1rem;
+  justify-content: center;
+  gap: 1rem;
+
+  & .line {
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--text);
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    &.active {
+      background: var(--text-light);
+    }
+  }
 }
 
 @media (max-width: 1024px) {
@@ -153,11 +222,11 @@ const serverItems: ServerCard[] = [
     gap: 0;
     border-radius: 0;
 
-    .intro {
+    & .intro {
       font-size: 0.75rem;
     }
 
-    .button {
+    & .button {
       width: 75%;
     }
   }
@@ -167,7 +236,7 @@ const serverItems: ServerCard[] = [
   .server-card .text {
     width: 75%;
 
-    .button span {
+    & .button span {
       font-size: 0.75rem;
     }
   }
