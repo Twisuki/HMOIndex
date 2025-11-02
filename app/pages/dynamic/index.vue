@@ -4,7 +4,7 @@ const { data: home } = await useAsyncData(() => queryCollection("dynamic").all()
 
 <template>
   <div class="page">
-    &nbsp;
+    {{ home }}
   </div>
 </template>
 
