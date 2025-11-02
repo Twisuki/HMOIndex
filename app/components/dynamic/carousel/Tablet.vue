@@ -41,7 +41,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <BaseSection class="carousel-container">
+  <BaseSection classname="carousel-container">
     <div
       class="carousel"
       :style="{ backgroundImage: `url(${items[currentIndex]?.cover})` }"

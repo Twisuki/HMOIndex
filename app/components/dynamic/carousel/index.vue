@@ -25,7 +25,7 @@ const items = computed<Item[]>(() =>
 </script>
 
 <template>
-  <BaseSection class="carousel-container">
+  <BaseSection classname="carousel-container">
     <BaseResponsive :breakpoints="640">
       <template #desktop>
         <DynamicCarouselDesktop :items />
