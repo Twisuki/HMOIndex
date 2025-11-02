@@ -9,22 +9,22 @@ const buttonItems: ButtonItem[] = [
   {
     label: "服务器介绍",
     to: "/server",
-    color: "blue",
+    color: "#5c77ff",
   },
   {
     label: "社团动态",
     to: "/dynamic",
-    color: "blue",
+    color: "#5cb3ff",
   },
   {
     label: "直播间",
     to: "https://live.bilibili.com/1805408278",
-    color: "blue",
+    color: "#5cdfff",
   },
   {
     label: "加入我们",
     to: "",
-    color: "blue",
+    color: "#58f4e2",
   },
 ]
 </script>
@@ -51,6 +51,9 @@ const buttonItems: ButtonItem[] = [
             :href="item.to"
             class="button-item"
             :class="{ scrolled }"
+            :style="{
+              backgroundColor: item.color,
+            }"
           >
             <span>{{ item.label }}</span>
           </a>
