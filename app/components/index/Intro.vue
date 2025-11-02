@@ -111,6 +111,10 @@ const buttonItems: ButtonItem[] = [
 .button-item.scrolled {
   transform: skew(-20deg) translateY(0);
   opacity: 1;
+
+  &:hover {
+    transform: skew(-20deg) translateY(-4px);
+  }
 }
 
 @media (max-width: 768px) {

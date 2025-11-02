@@ -7,6 +7,7 @@ interface SectionProps {
 
 const props = defineProps<SectionProps>()
 
+const isLoaded = ref(false)
 const scrolled = ref(false)
 const sectionRef = ref<HTMLElement | null>(null)
 let observer: IntersectionObserver | null = null
@@ -28,6 +29,8 @@ onMounted(() => {
   if (sectionRef.value) {
     observer.observe(sectionRef.value)
   }
+
+  isLoaded.value = true
 })
 
 onUnmounted(() => {
@@ -46,7 +49,10 @@ onUnmounted(() => {
       classname,
     ]"
   >
-    <slot :scrolled="scrolled" />
+    <slot
+      v-if="isLoaded"
+      :scrolled="scrolled"
+    />
   </div>
 </template>
 
