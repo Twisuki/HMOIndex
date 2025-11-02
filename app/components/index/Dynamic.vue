@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <IndexSection
+  <BaseSection
     classname="dynamic-container"
     card
   >
@@ -14,7 +14,7 @@
         <p>同步 DYNAMIC 页面信息. 第一部分为轮播, 第二部分为列表 + 传送门.</p>
       </div>
     </template>
-  </IndexSection>
+  </BaseSection>
 </template>
 
 <style scoped>

@@ -53,7 +53,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <IndexSection
+  <BaseSection
     classname="server-container"
     card
   >
@@ -100,7 +100,7 @@ onBeforeUnmount(() => {
         />
       </div>
     </template>
-  </IndexSection>
+  </BaseSection>
 </template>
 
 <style scoped>

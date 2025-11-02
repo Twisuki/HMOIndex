@@ -30,7 +30,7 @@ const buttonItems: ButtonItem[] = [
 </script>
 
 <template>
-  <IndexSection
+  <BaseSection
     :scroll="0.75"
     classname="intro-container"
     card
@@ -60,7 +60,7 @@ const buttonItems: ButtonItem[] = [
         </div>
       </div>
     </template>
-  </IndexSection>
+  </BaseSection>
 </template>
 
 <style scoped>

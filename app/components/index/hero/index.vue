@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <IndexSection classname="hero-container">
+  <BaseSection classname="hero-container">
     <template #default="{ scrolled }">
       <BaseResponsive :breakpoints="640">
         <template #desktop>
@@ -14,7 +14,7 @@
         </template>
       </BaseResponsive>
     </template>
-  </IndexSection>
+  </BaseSection>
 </template>
 
 <style scoped>
