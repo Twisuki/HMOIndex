@@ -29,7 +29,7 @@ const handleMouseLeave = () => {
   <div class="navbar">
     <div class="left">
       <img
-        src="~/assets/images/title.png"
+        src="/images/title.png"
         alt="HMO"
       >
     </div>
