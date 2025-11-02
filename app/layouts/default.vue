@@ -1,12 +1,19 @@
 <script setup lang="ts">
+const isLoaded = ref(false)
 
+onMounted(() => {
+  isLoaded.value = true
+})
 </script>
 
 <template>
   <div class="app">
     <BaseBackground />
 
-    <div class="container">
+    <div
+      v-show="isLoaded"
+      class="container"
+    >
       <BaseNavbar />
       <div class="content">
         <slot />
