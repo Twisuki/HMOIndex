@@ -18,6 +18,6 @@ useHead({
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 0 var(--padding-x);
+  padding: 0 var(--padding-x) var(--padding-y);
 }
 </style>

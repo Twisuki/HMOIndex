@@ -24,8 +24,6 @@ const items = computed<Item[]>(() =>
     path,
   })) || [],
 )
-
-console.log(dynamic.value)
 </script>
 
 <template>
