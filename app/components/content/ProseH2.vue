@@ -1,0 +1,32 @@
+<script setup lang="ts">
+defineProps<{ id?: string }>()
+</script>
+
+<template>
+  <h2 :id="id">
+    <slot />
+  </h2>
+</template>
+
+<style scoped>
+h2 {
+  position: relative;
+  color: var(--text-light);
+
+  &::before {
+    content: "#";
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateX(calc(-100% - 0.5rem));
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  &:hover {
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+</style>
