@@ -4,6 +4,7 @@ export interface Item {
   description: string
   date: string
   cover: string
+  path: string
 }
 
 const { data: dynamic } = await useAsyncData(() => {
@@ -15,13 +16,16 @@ const { data: dynamic } = await useAsyncData(() => {
 })
 
 const items = computed<Item[]>(() =>
-  dynamic.value?.map(({ title, description, date, cover }) => ({
+  dynamic.value?.map(({ title, description, date, cover, path }) => ({
     title,
     description,
     date,
     cover,
+    path,
   })) || [],
 )
+
+console.log(dynamic.value)
 </script>
 
 <template>

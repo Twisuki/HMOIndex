@@ -60,8 +60,19 @@ onBeforeUnmount(() => {
           <div class="description">
             {{ item.description }}
           </div>
-          <div class="date">
-            {{ item.date }}
+          <div class="info">
+            <span class="date">
+              {{ item.date }}
+            </span>
+            <a
+              :href="item.path"
+              class="button"
+            >
+              <span>
+                详细信息
+                <i class="fa-solid fa-arrow-right" />
+              </span>
+            </a>
           </div>
         </div>
       </div>
@@ -117,9 +128,34 @@ onBeforeUnmount(() => {
     font-size: var(--font-size);
   }
 
-  & .date {
+  & .info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     font-size: 0.75rem;
     color: var(--text-focus);
+
+    & .button {
+      margin-left: auto;
+      transform: skew(-20deg);
+      border: 1px solid var(--text-light);
+      padding: 0 var(--padding-y);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+
+      & span {
+        font-size: var(--font-size);
+        transform: skew(20deg);
+        color: var(--text-light);
+      }
+
+      &:hover {
+        transform: scale(1.1) skew(-20deg);
+      }
+    }
   }
 
   &.active {

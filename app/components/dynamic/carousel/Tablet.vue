@@ -46,16 +46,26 @@ onBeforeUnmount(() => {
       class="carousel"
       :style="{ backgroundImage: `url(${items[currentIndex]?.cover})` }"
     >
-      <div class="item">
-        <div class="title">
-          {{ items[currentIndex]?.title }}
+      <div class="item-container">
+        <div class="item">
+          <div class="title">
+            {{ items[currentIndex]?.title }}
+          </div>
+          <div class="description">
+            {{ items[currentIndex]?.description }}
+          </div>
+          <div class="date">
+            {{ items[currentIndex]?.date }}
+          </div>
         </div>
-        <div class="description">
-          {{ items[currentIndex]?.description }}
-        </div>
-        <div class="date">
-          {{ items[currentIndex]?.date }}
-        </div>
+        <a
+          :href="items[currentIndex]?.path"
+          class="button-container"
+        >
+          <span>
+            <i class="fa-solid fa-arrow-right" />
+          </span>
+        </a>
       </div>
     </div>
     <div class="line-container">
@@ -92,15 +102,19 @@ onBeforeUnmount(() => {
   align-items: flex-end;
 }
 
-.item {
+.item-container {
   width: 100%;
   padding: 0 var(--padding-y);
+  display: flex;
+  background-color: var(--bg-cover);
+}
+
+.item {
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  background-color: var(--bg-cover);
-  transition: background 2s ease;
 
   & .title {
     font-size: var(--title-size);
@@ -114,6 +128,23 @@ onBeforeUnmount(() => {
   & .date {
     font-size: 0.75rem;
     color: var(--text-focus);
+  }
+}
+
+.button-container {
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & span {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-color: var(--text-focus);
+    text-align: center;
+    color: var(--bg);
   }
 }
 

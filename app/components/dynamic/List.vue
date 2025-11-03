@@ -5,6 +5,7 @@ export interface Item {
   date: string
   author: string
   cover: string
+  path: string
 }
 
 const skipedCount = 5
@@ -18,12 +19,13 @@ const { data: dynamic } = await useAsyncData(() => {
 })
 
 const items = computed<Item[]>(() =>
-  dynamic.value?.slice(skipedCount).map(({ title, description, date, author, cover }) => ({
+  dynamic.value?.slice(skipedCount).map(({ title, description, date, author, cover, path }) => ({
     title,
     description,
     date,
     author,
     cover,
+    path,
   })) || [],
 )
 </script>
@@ -37,8 +39,9 @@ const items = computed<Item[]>(() =>
       classname="item-container"
     >
       <template #default="{ scrolled }">
-        <div
+        <a
           class="item"
+          :href="item.path"
           :class="{ scrolled }"
         >
           <div
@@ -63,7 +66,7 @@ const items = computed<Item[]>(() =>
               </span>
             </div>
           </div>
-        </div>
+        </a>
       </template>
     </BaseSection>
   </div>
@@ -91,6 +94,8 @@ const items = computed<Item[]>(() =>
   height: 10rem;
   display: flex;
   gap: var(--padding-y);
+  text-decoration: none;
+  color: var(--text);
 
   & .cover {
     height: 100%;
@@ -131,6 +136,12 @@ const items = computed<Item[]>(() =>
       & .date {
         color: var(--text-focus);
       }
+    }
+  }
+
+  &:hover {
+    & .title {
+      text-decoration: underline;
     }
   }
 }
