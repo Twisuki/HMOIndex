@@ -1,13 +1,3 @@
-<template>
-  <component
-    :is="ImageComponent"
-    :src="refinedSrc"
-    :alt="props.alt"
-    :width="props.width"
-    :height="props.height"
-  />
-</template>
-
 <script setup lang="ts">
 import { withTrailingSlash, withLeadingSlash, joinURL } from "ufo"
 import { useRuntimeConfig, computed } from "#imports"
@@ -43,3 +33,20 @@ const refinedSrc = computed(() => {
   return props.src
 })
 </script>
+
+<template>
+  <component
+    :is="ImageComponent"
+    class="img"
+    :src="refinedSrc"
+    :alt="props.alt"
+    :width="props.width"
+    :height="props.height"
+  />
+</template>
+
+<style scoped>
+.img {
+  margin: var(--padding-y) 0;
+}
+</style>

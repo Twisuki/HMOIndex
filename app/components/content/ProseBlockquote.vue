@@ -7,6 +7,7 @@
 <style scoped>
 blockquote {
   position: relative;
+  margin: var(--padding-y) 0;
   background-color: var(--bg-light);
   padding: 1rem 1rem 1rem 2rem;
   overflow-x: auto;

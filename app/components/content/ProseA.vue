@@ -1,12 +1,3 @@
-<template>
-  <NuxtLink
-    :href="props.href"
-    :target="props.target"
-  >
-    <slot />
-  </NuxtLink>
-</template>
-
 <script setup lang="ts">
 import type { PropType } from "vue"
 
@@ -22,3 +13,22 @@ const props = defineProps({
   },
 })
 </script>
+
+<template>
+  <a
+    :href="props.href"
+  >
+    <slot />
+  </a>
+</template>
+
+<style scoped>
+a {
+  text-decoration: none;
+  color: var(--text-focus);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+</style>
