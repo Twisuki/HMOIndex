@@ -73,7 +73,7 @@ const handleClick = () => {
 .pre-container {
   margin: var(--padding-y) 0;
   border-radius: 0.5rem;
-  overflow: hidden;
+  overflow: visible;
   background-color: var(--bg-light);
 }
 
@@ -109,6 +109,23 @@ const handleClick = () => {
 
 .content {
   padding: 0 var(--padding-y);
-  white-space: pre-wrap;
+  white-space: pre;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+
+  & pre {
+    display: block;
+    min-width: max-content;
+    white-space: pre;
+    overflow: auto;
+  }
+
+  & code {
+    padding: 0.75rem 1rem;
+    display: block;
+    min-width: max-content;
+    white-space: pre;
+    overflow: auto;
+  }
 }
 </style>
