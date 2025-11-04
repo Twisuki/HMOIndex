@@ -6,7 +6,11 @@ useHead({
 
 <template>
   <div class="page">
-    <DynamicTitle />
+    <BaseSection classname="title-container">
+      <template #title>
+        社团动态
+      </template>
+    </BaseSection>
     <DynamicCarousel />
     <DynamicList />
   </div>
@@ -18,5 +22,13 @@ useHead({
   flex-direction: column;
   gap: 1rem;
   padding: 0 var(--padding-x);
+}
+
+.title-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 </style>
