@@ -15,7 +15,7 @@ const serverItems: ServerCard[] = [
   },
   {
     title: "古典服",
-    intro: "当现代文明的辉煌隐去，古典的回声响彻耳畔，ban生电和高频红石之后，玩家们又将何去何从，远古的大陆上最早的文明走出了新的乐章。",
+    intro: "当现代文明的辉煌隐去, 古典的回声响彻耳畔, ban生电和高频红石之后, 玩家们又将何去何从, 远古的大陆上最早的文明走出了新的乐章.",
     cover: "/images/index/cover_1.jpg",
     to: "/server",
   },
