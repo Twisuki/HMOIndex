@@ -37,6 +37,7 @@ const items = computed<Item[]>(() =>
       :key="index"
       card
       classname="item-container"
+      :scroll="0"
     >
       <template #default="{ scrolled }">
         <a
@@ -96,6 +97,14 @@ const items = computed<Item[]>(() =>
   gap: var(--padding-y);
   text-decoration: none;
   color: var(--text);
+  transform: translateX(50%);
+  opacity: 0;
+  transition: all 0.5s ease;
+
+  &.scrolled {
+    transform: translateX(0%);
+    opacity: 1;
+  }
 
   & .cover {
     height: 100%;

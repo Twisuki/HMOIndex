@@ -44,6 +44,7 @@ const serverItems = computed<ServerCard[]>(() =>
         :key="index"
         classname="item-container"
         card
+        :scroll="0"
       >
         <template #default="{ scrolled }">
           <a
@@ -100,6 +101,14 @@ const serverItems = computed<ServerCard[]>(() =>
   gap: var(--padding-y);
   text-decoration: none;
   color: var(--text);
+  transform: translateX(50%);
+  opacity: 0;
+  transition: all 0.5s ease;
+
+  &.scrolled {
+    transform: translateX(0%);
+    opacity: 1;
+  }
 
   & .cover {
     height: 100%;
