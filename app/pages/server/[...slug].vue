@@ -12,7 +12,7 @@ console.log(page.value)
     <BaseSection classname="nav-container">
       <template #title>
         <a
-          href="/dynamic"
+          href="/server"
           class="nav"
         >
           <i class="fa-solid fa-arrow-left" />
@@ -35,12 +35,22 @@ console.log(page.value)
 
     <div class="info">
       <span class="date">
+        开服日期:
         <i class="fa-solid fa-calendar" />
-        {{ page?.date }}
+        <span>
+          {{ page?.date || "xxxx-xx-xx" }}
+        </span>
       </span>
-      <span class="author">
-        <i class="fa-solid fa-user" />
-        {{ page?.author }}
+      <span class="map">
+        网页地图:
+        <i class="fa-solid fa-earth-americas" />
+        <a
+          v-if="page?.map"
+          :href="page?.map"
+        >
+          {{ page?.map || "暂无" }}
+        </a>
+        <span v-else>暂无</span>
       </span>
     </div>
 
@@ -60,7 +70,7 @@ console.log(page.value)
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 0 var(--padding-x);
+  padding: 0 var(--padding-x) var(--padding-y);
 }
 
 .nav {
@@ -107,5 +117,26 @@ console.log(page.value)
   gap: 1rem;
   align-items: center;
   justify-content: start;
+
+  & span {
+    font-size: var(--font-size);
+    color: var(--text-light);
+  }
+
+  & a {
+    color: var(--text-light);
+    text-decoration: underline;
+
+    &:hover {
+      color: var(--text-focus);
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 </style>
