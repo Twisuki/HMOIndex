@@ -10,23 +10,23 @@ export interface Item {
 
 const skipedCount = 5
 
-// .skip(5) 未知问题, 无法使用
 const { data: dynamic } = await useAsyncData(() => {
   return queryCollection("dynamic")
     .order("date", "DESC")
     .order("index", "DESC")
+    .select(
+      "title",
+      "description",
+      "date",
+      "author",
+      "cover",
+      "path",
+    )
     .all()
 })
 
 const items = computed<Item[]>(() =>
-  dynamic.value?.slice(skipedCount).map(({ title, description, date, author, cover, path }) => ({
-    title,
-    description,
-    date,
-    author,
-    cover,
-    path,
-  })) || [],
+  dynamic.value?.slice(skipedCount) as Item[],
 )
 </script>
 

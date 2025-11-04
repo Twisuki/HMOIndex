@@ -11,18 +11,19 @@ const { data: dynamic } = await useAsyncData(() => {
   return queryCollection("dynamic")
     .order("date", "DESC")
     .order("index", "DESC")
+    .select(
+      "title",
+      "description",
+      "date",
+      "cover",
+      "path",
+    )
     .limit(5)
     .all()
 })
 
 const items = computed<Item[]>(() =>
-  dynamic.value?.map(({ title, description, date, cover, path }) => ({
-    title,
-    description,
-    date,
-    cover,
-    path,
-  })) || [],
+  dynamic.value as Item[],
 )
 </script>
 
