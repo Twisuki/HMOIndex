@@ -3,50 +3,27 @@ interface ServerCard {
   title: string
   intro: string
   cover: string
-  to: string
+  path: string
 }
 
-const serverItems: ServerCard[] = [
-  {
-    title: "起源服",
-    intro: "以生电, 建造玩法为核心, 生电佬交流中心, 社团重要线上活动举办地, 社团早期文化遗产圣地, 现已进入老年期.",
-    cover: "/images/index/cover_1.jpg",
-    to: "/server",
-  },
-  {
-    title: "古典服",
-    intro: "当现代文明的辉煌隐去, 古典的回声响彻耳畔, ban生电和高频红石之后, 玩家们又将何去何从, 远古的大陆上最早的文明走出了新的乐章.",
-    cover: "/images/index/cover_1.jpg",
-    to: "/server",
-  },
-  {
-    title: "复建服",
-    intro: "你心中的大学是什么样子? 我想...复建属于我们的湖南大学! 幻境社复建部专属服务器, 24h不间断营业, 工期密排ing!",
-    cover: "/images/index/cover_1.jpg",
-    to: "/server",
-  },
-  {
-    title: "起床服",
-    intro: "老发聊发少年狂, pvp玩起床, 经典, 也是当年模样. 湖大起床服重启1.8.9版本经典4v4v4v4, 于寒暑假举办HUC起床战争系列赛, 欢迎大家组队报名.",
-    cover: "/images/index/cover_1.jpg",
-    to: "/server",
-  },
-  {
-    title: "生存乐事",
-    intro: "厌倦了996的生活? 那就一起来玩生!存!乐!事! 更多结构, 更多冒险, 更多社交, 还有更多品类的菜品等你发现! 要养老, 就来生存乐事!",
-    cover: "/images/index/cover_1.jpg",
-    to: "/server",
-  },
-  {
-    title: "天空厨房",
-    intro: "天空从来不是极限, 美食也能到达更远的天际! 机械动力的轰鸣中, 农夫仍在天空享有自己的一片田园, 做出更多美食, 天空厨房cook in sky.",
-    cover: "/images/index/cover_1.jpg",
-    to: "/server",
-  },
-]
+const { data: server } = await useAsyncData(() => {
+  return queryCollection("server")
+    .order("index", "ASC")
+    .select(
+      "title",
+      "intro",
+      "cover",
+      "path",
+    )
+    .all()
+})
+
+const serverItems = computed<ServerCard[]>(() =>
+  server.value as ServerCard[],
+)
 
 const currentIndex = ref(0)
-const totalIndex = serverItems.length
+const totalIndex = serverItems.value.length
 let timer: number | null = null
 const interval = 5000
 
@@ -108,8 +85,9 @@ onBeforeUnmount(() => {
           <div class="intro">
             {{ item.intro }}
           </div>
+          <!-- TODO 重构轮播, 修复按钮问题 -->
           <a
-            :href="item.to"
+            :href="item.path"
             class="button"
           >
             <span>
