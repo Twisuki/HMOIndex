@@ -9,7 +9,7 @@ defineProps<{ id?: string }>()
         :id="id"
         :class="{ scrolled }"
       >
-        <slot />
+        <slot /> (本组件作为标题使用, 因此md中不允许使用一级标题)
       </h1>
     </template>
   </BaseSection>
