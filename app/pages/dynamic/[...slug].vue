@@ -8,10 +8,10 @@ const { data: page } = await useAsyncData(route.path, () => {
 <template>
   <div class="page">
     <BaseSection classname="nav-container">
-      <template #default="{ scrolled }">
+      <template #title>
         <a
           href="/dynamic"
-          :class="{ scrolled }"
+          class="nav"
         >
           <i class="fa-solid fa-arrow-left" />
           返回主页
@@ -61,45 +61,22 @@ const { data: page } = await useAsyncData(route.path, () => {
   padding: 0 var(--padding-x);
 }
 
-.nav-container {
-  position: relative;
+.nav {
   width: 100%;
-  padding: 0;
+  margin-bottom: 1rem;
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: var(--title-size);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 4px;
-    width: 100%;
-    height: 4px;
-    border-radius: 2px;
-    background-color: var(--text);
+  & i {
+    transition: transform 0.3s ease;
   }
 
-  & a {
-    width: 100%;
-    margin-bottom: 1rem;
-    color: var(--text-light);
-    text-decoration: none;
-    font-size: var(--title-size);
-    transform: translateX(5%);
-    opacity: 0;
-    transition: all 0.3s ease;
-    display: block;
-
-    &.scrolled {
-      transform: translateX(0);
-      opacity: 1;
-    }
-
-    & i {
-      transition: transform 0.3s ease;
-    }
-
-    &:hover i {
-      transform: translateX(-2px);
-    }
+  &:hover i {
+    transform: translateX(-2px);
   }
 }
 

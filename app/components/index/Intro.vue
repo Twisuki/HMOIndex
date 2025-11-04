@@ -80,6 +80,7 @@ const buttonItems: ButtonItem[] = [
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-top: 1rem;
 }
 
 .text {

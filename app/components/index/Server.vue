@@ -83,7 +83,14 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <BaseSection classname="server-container">
+  <BaseSection
+    classname="server-container"
+    :scroll="0"
+  >
+    <template #title>
+      <i class="fa-solid fa-server" />
+      我们的服务器
+    </template>
     <div class="server">
       <div
         v-for="(item, index) in serverItems"

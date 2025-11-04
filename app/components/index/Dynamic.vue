@@ -91,7 +91,12 @@ onBeforeUnmount(() => {
 <template>
   <BaseSection
     classname="dynamic-container"
+    :scroll="0"
   >
+    <template #title>
+      <i class="fa-solid fa-play" />
+      最新动态
+    </template>
     <div class="dynamic">
       <div
         class="carousel-container"
@@ -109,13 +114,13 @@ onBeforeUnmount(() => {
           @mouseleave="handleMouseLeave"
         />
       </div>
-      <a
-        class="content"
-        :href="items[currentIndex]?.path"
-      >
-        <div class="title">
+      <div class="content">
+        <a
+          class="title"
+          :href="items[currentIndex]?.path"
+        >
           {{ items[currentIndex]?.title }}
-        </div>
+        </a>
         <div class="description">
           {{ items[currentIndex]?.description }}
         </div>
@@ -127,7 +132,7 @@ onBeforeUnmount(() => {
             {{ items[currentIndex]?.date }}
           </span>
         </div>
-      </a>
+      </div>
     </div>
   </BaseSection>
 </template>
@@ -178,12 +183,16 @@ onBeforeUnmount(() => {
   flex-direction: column;
   justify-content: center;
   gap: 0.5rem;
-  text-decoration: none;
   color: var(--text);
 
   & .title {
+    text-decoration: none;
     font-size: var(--title-size);
     color: var(--text-light);
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   & .description {
@@ -203,12 +212,6 @@ onBeforeUnmount(() => {
 
     & .date {
       color: var(--text-focus);
-    }
-  }
-
-  &:hover {
-    & .title {
-      text-decoration: underline;
     }
   }
 }

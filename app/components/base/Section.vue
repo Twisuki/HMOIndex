@@ -5,7 +5,11 @@ interface SectionProps {
   classname?: string | string[] | Record<string, boolean>
 }
 
-const props = defineProps<SectionProps>()
+const props = withDefaults(defineProps<SectionProps>(), {
+  scroll: 0.5,
+  card: false,
+  classname: "",
+})
 
 const scrolled = ref(false)
 const sectionRef = ref<HTMLElement | null>(null)
@@ -21,7 +25,7 @@ onMounted(() => {
       }
     },
     {
-      threshold: (props.scroll && props.scroll >= 0 && props.scroll < 1) ? props.scroll : 0.5,
+      threshold: (props.scroll >= 0 && props.scroll < 1) ? props.scroll : 0.5,
     },
   )
 
@@ -46,6 +50,14 @@ onUnmounted(() => {
       classname,
     ]"
   >
+    <div
+      v-if="$slots.title"
+      class="title"
+    >
+      <span :class="{ scrolled }">
+        <slot name="title" />
+      </span>
+    </div>
     <slot :scrolled="scrolled" />
   </div>
 </template>
@@ -53,7 +65,41 @@ onUnmounted(() => {
 <style scoped>
 .section {
   display: flex;
+  flex-direction: column;
   border-radius: 1rem;
+}
+
+.title {
+  position: relative;
+  width: 100%;
+  padding: 0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 4px;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background-color: var(--text);
+  }
+
+  & span {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: var(--text-light);
+    font-size: var(--title-size);
+    transform: translateX(5%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    display: block;
+
+    &.scrolled {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
 }
 
 @media (min-width: 768px) {
