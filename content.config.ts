@@ -19,7 +19,6 @@ export default defineContentConfig({
         intro: z.string().describe("服务器简介(艺术向)"),
         cover: z.string().describe("封面url"),
         date: z.string().describe("开服日期"),
-        ip: z.string().describe("服务器ip"),
         map: z.string().nullable().describe("网页地图url"),
         index: z.number().describe("序号"),
       }),
