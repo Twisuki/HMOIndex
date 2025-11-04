@@ -1,0 +1,21 @@
+---
+cover:
+  - url: "/images/cover.jpg"
+    server: "origin"
+    description: "测试封面"
+  - url: "/images/index/cover_1.jpg"
+    server: "classic"
+    description: "测试封面2"
+  - url: "/images/cover.jpg"
+    server: "origin"
+    description: "测试封面3"
+  - url: "/images/index/cover_1.jpg"
+    server: "classic"
+    description: "测试封面4"
+  - url: "/images/cover.jpg"
+    server: "origin"
+    description: "测试封面5"
+  - url: "/images/index/cover_1.jpg"
+    server: "classic"
+    description: "测试封面6"
+---
