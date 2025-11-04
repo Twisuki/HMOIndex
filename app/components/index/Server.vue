@@ -70,24 +70,20 @@ onBeforeUnmount(() => {
     </template>
     <div class="server">
       <div
-        v-for="(item, index) in serverItems"
-        :key="index"
         class="server-card"
-        :class="{ shown: index === currentIndex }"
         :style="{
-          backgroundImage: `url(${item.cover})`,
+          backgroundImage: `url(${serverItems[currentIndex]?.cover})`,
         }"
       >
         <div class="text">
           <div class="title">
-            {{ item.title }}
+            {{ serverItems[currentIndex]?.title }}
           </div>
           <div class="intro">
-            {{ item.intro }}
+            {{ serverItems[currentIndex]?.intro }}
           </div>
-          <!-- TODO 重构轮播, 修复按钮问题 -->
           <a
-            :href="item.path"
+            :href="serverItems[currentIndex]?.path"
             class="button"
           >
             <span>
@@ -135,8 +131,7 @@ onBeforeUnmount(() => {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  opacity: 0;
-  transition: opacity 2s ease;
+  transition: all 2s ease;
 
   & .text {
     position: absolute;
@@ -184,10 +179,6 @@ onBeforeUnmount(() => {
         transform: scale(1.1) skew(-20deg);
       }
     }
-  }
-
-  &.shown {
-    opacity: 1;
   }
 }
 
