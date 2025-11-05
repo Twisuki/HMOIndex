@@ -106,6 +106,7 @@ const getServerDays = (dateStr: string) => {
   align-items: center;
   gap: var(--padding-y);
   margin: var(--padding-y) 0;
+  overflow-x: hidden;
 }
 
 .item-container {

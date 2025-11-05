@@ -88,6 +88,7 @@ const items = computed<Item[]>(() =>
   align-items: center;
   width: 100%;
   padding: var(--padding-y) var(--padding-y);
+  overflow-x: hidden;
 }
 
 .item {
