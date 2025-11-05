@@ -47,4 +47,10 @@ h1 {
     opacity: 1;
   }
 }
+
+@media (max-width: 640px) {
+  h1::before {
+    display: none;
+  }
+}
 </style>

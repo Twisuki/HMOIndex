@@ -30,4 +30,10 @@ h5 {
     }
   }
 }
+
+@media (max-width: 640px) {
+  h5::before {
+    display: none;
+  }
+}
 </style>

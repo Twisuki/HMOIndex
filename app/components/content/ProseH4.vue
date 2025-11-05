@@ -30,4 +30,10 @@ h4 {
     }
   }
 }
+
+@media (max-width: 640px) {
+  h4::before {
+    display: none;
+  }
+}
 </style>

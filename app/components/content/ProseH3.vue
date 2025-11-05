@@ -30,4 +30,10 @@ h3 {
     }
   }
 }
+
+@media (max-width: 640px) {
+  h3::before {
+    display: none;
+  }
+}
 </style>
