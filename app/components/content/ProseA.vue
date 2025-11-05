@@ -17,6 +17,7 @@ const props = defineProps({
 <template>
   <a
     :href="props.href"
+    target="_blank"
   >
     <slot />
   </a>

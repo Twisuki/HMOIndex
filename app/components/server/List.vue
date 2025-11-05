@@ -25,6 +25,25 @@ const { data: server } = await useAsyncData(() => {
 const serverItems = computed<ServerCard[]>(() =>
   server.value as ServerCard[],
 )
+
+const getServerDays = (dateStr: string) => {
+  const dateRegex = /^\d{4}-\d{2}-\d{2}$/
+  if (!dateRegex.test(dateStr)) {
+    throw new Error("格式错误!")
+  }
+
+  const date = new Date(dateStr)
+  const timestamp = date.getTime()
+
+  if (isNaN(timestamp)) throw new Error("日期不存在!")
+
+  const now = new Date()
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  const todayTimestamp = today.getTime()
+
+  const diffInMs = todayTimestamp - timestamp
+  return Math.round(diffInMs / (1000 * 60 * 60 * 24))
+}
 </script>
 
 <template>
@@ -67,6 +86,9 @@ const serverItems = computed<ServerCard[]>(() =>
               </div>
               <div class="date">
                 开服日期: {{ item.date || "--已不可考--" }}
+                <template v-if="item.date">
+                  (已开服 {{ getServerDays(item.date) }} 天)
+                </template>
               </div>
             </div>
           </a>

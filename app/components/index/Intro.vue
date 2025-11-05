@@ -3,6 +3,7 @@ interface ButtonItem {
   label: string
   to: string
   color: string
+  newTab: boolean
 }
 
 const buttonItems: ButtonItem[] = [
@@ -10,21 +11,25 @@ const buttonItems: ButtonItem[] = [
     label: "服务器介绍",
     to: "/server",
     color: "#5c77ff",
+    newTab: false,
   },
   {
     label: "社团动态",
     to: "/dynamic",
     color: "#5cb3ff",
+    newTab: false,
   },
   {
     label: "直播间",
     to: "https://live.bilibili.com/1805408278",
     color: "#5cdfff",
+    newTab: true,
   },
   {
     label: "加入我们",
-    to: "",
+    to: "https://qm.qq.com/q/Im6dRT56w2",
     color: "#58f4e2",
+    newTab: true,
   },
 ]
 </script>
@@ -56,6 +61,7 @@ const buttonItems: ButtonItem[] = [
             :href="item.to"
             class="button-item"
             :class="{ scrolled }"
+            :target="item.newTab ? '_blank' : undefined"
             :style="{
               backgroundColor: item.color,
             }"

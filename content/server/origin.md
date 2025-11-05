@@ -6,6 +6,7 @@ description: "湖大起源服是由 Minecraft 岳麓幻境社开设的 Purpur �
 cover: "/content/server/origin_cover.png"
 date: "2025-02-06"
 map: "mc.hmomc.cn:25570"
+ip: "origin.hmomc.cn"
 index: 1
 ---
 

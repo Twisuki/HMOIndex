@@ -6,5 +6,6 @@ description: ""
 cover: "/images/server/cover_1.jpg"
 date: "2025-08-29"
 map: "mc.hmomc.cn:25585"
+ip: "survival-delight.hmomc.cn"
 index: 5
 ---

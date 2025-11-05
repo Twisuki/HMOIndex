@@ -6,6 +6,7 @@ description: "湖大古典服是由 Minecraft 岳麓幻境社开设的 Paper 端
 cover: "/images/server/cover_1.jpg"
 date: "2025-04-03"
 map: "mc.hmomc.cn:25571"
+ip: "classic.hmomc.cn"
 index: 2
 ---
 

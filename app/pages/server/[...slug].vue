@@ -46,7 +46,8 @@ console.log(page.value)
         <i class="fa-solid fa-earth-americas" />
         <a
           v-if="page?.map"
-          :href="page?.map"
+          :href="`https://${page?.map}`"
+          target="_blank"
         >
           {{ page?.map || "暂无" }}
         </a>
