@@ -12,19 +12,22 @@ defineProps<{ id?: string }>()
 h6 {
   position: relative;
   color: var(--text-light);
-}
+  margin: var(--padding-y) 0;
 
-h6::before {
-  content: "#";
-  position: absolute;
-  left: 0;
-  top: 0;
-  transform: translateX(calc(-100% - 0.5rem));
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
+  &::before {
+    content: "#";
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateX(calc(-100% - 0.5rem));
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
 
-h6:hover::before {
-  opacity: 1;
+  &:hover {
+    &::before {
+      opacity: 1;
+    }
+  }
 }
 </style>

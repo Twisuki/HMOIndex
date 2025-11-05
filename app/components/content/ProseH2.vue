@@ -12,6 +12,7 @@ defineProps<{ id?: string }>()
 h2 {
   position: relative;
   color: var(--text-light);
+  margin: var(--padding-y) 0;
 
   &::before {
     content: "#";

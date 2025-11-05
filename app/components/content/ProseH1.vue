@@ -20,6 +20,7 @@ defineProps<{ id?: string }>()
   position: relative;
   width: 100%;
   padding: 0;
+  margin: var(--padding-y) 0;
 
   &::after {
     content: "";
