@@ -23,7 +23,7 @@ const items = computed<Cover[]>(() =>
     cover: item.url,
     server: server.value?.find(s => s.name === item.server)?.title || "",
     description: item.description,
-  })) || [],
+  })).sort(() => Math.random() - 0.5) || [],
 )
 
 const currentIndex = ref(0)
