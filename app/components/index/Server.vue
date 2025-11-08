@@ -64,6 +64,7 @@ onBeforeUnmount(() => {
     classname="server-container"
     :scroll="0"
   >
+    <BaseImgPreloader :src="serverItems[(currentIndex + 1) % totalIndex]?.cover" />
     <template #title>
       <i class="fa-solid fa-server" />
       我们的服务器

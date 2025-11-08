@@ -79,6 +79,7 @@ onBeforeUnmount(() => {
 
 <template>
   <BaseSection classname="carousel-container">
+    <BaseImgPreloader :src="items[(currentIndex + 3) % totalIndex]?.cover" />
     <div
       class="img"
       :style="{
