@@ -158,13 +158,19 @@ const items = computed<Item[]>(() =>
 
 @media (max-width: 768px) {
   .item {
-    height: 8rem;
+    height: auto;
+    & .cover {
+      height: 8rem;
+    }
   }
 }
 
 @media (max-width: 640px) {
   .item {
-    height: 4rem;
+    height: auto;
+    & .cover {
+      height: 4rem;
+    }
   }
 }
 </style>
