@@ -7,7 +7,6 @@
 ### 1.1 依赖列表
 
 - dependencies
-
   - @nuxt/content: 3.8.0
   - @nuxt/eslint: 1.9.0
   - @nuxt/eslint-config: 1.9.0
@@ -20,7 +19,6 @@
   - vue-router: 4.6.3
 
 - devDependencies
-
   - @types/node: 24.9.1
   - eslint-plugin-format: 1.0.2
   - modern-css-reset: 1.4.0
@@ -50,15 +48,15 @@
 
 1. 安装依赖
 
-    ```bash
-    $ pnpm install
-    ```
+   ```bash
+   $ pnpm install
+   ```
 
 2. 启动开发服务器
 
-    ```bash
-    $ pnpm dev
-    ```
+   ```bash
+   $ pnpm dev
+   ```
 
 ## 3. 开发规范
 
@@ -66,7 +64,7 @@
 
 本项目使用 `@nuxt/eslint`, `@nuxt/eslint-config` 和 `eslint-plugin-format` 进行代码规范检查.
 
-请在提交代码之前运行 `eslint --fix` 进行代码格式化.
+请在提交代码之前运行 `pnpm lint` 进行代码格式化.
 
 ### 3.2 提交规范
 
