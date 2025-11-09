@@ -29,7 +29,7 @@ const items = computed<Cover[]>(() =>
 const currentIndex = ref(0)
 const totalIndex = items.value.length
 let timer: number | null = null
-const interval = 5000
+const interval = 3000
 
 const thumbnailList = computed<Cover[]>(() => {
   if (items.value.length === 0) return []
