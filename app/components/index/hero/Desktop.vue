@@ -24,7 +24,7 @@ defineProps<{ scrolled: boolean }>()
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  background-image: url("/images/index/cover_1.jpg");
+  background-image: url("/images/cover.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
