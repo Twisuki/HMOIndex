@@ -30,7 +30,7 @@ defineProps<{ scrolled: boolean }>()
 .bg {
   width: 100%;
   aspect-ratio: 16 / 9;
-  background-image: url("/images/cover.jpg");
+  background-image: url("/images/cover.webp");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
