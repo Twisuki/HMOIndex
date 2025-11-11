@@ -134,7 +134,7 @@ const toggleNav = () => {
   align-items: center;
   justify-content: center;
   gap: 4px;
-  background-color: var(--bg-cover);
+  background-color: var(--nav-cover);
   z-index: 100;
   pointer-events: none;
   opacity: 0;
