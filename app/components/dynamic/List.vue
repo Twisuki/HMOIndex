@@ -28,6 +28,18 @@ const { data: dynamic } = await useAsyncData(() => {
 const items = computed<Item[]>(() =>
   dynamic.value?.slice(skipedCount) as Item[],
 )
+
+const isImgLoaded = ref<boolean[]>(
+  items.value?.map((_item, index) => (index <= 1)) ?? [],
+)
+
+const handleScrolled = (scrlled: boolean, index: number) => {
+  if (scrlled) {
+    if (isImgLoaded.value[index + 2] !== undefined) {
+      isImgLoaded.value[index + 2] = true
+    }
+  }
+}
 </script>
 
 <template>
@@ -38,6 +50,7 @@ const items = computed<Item[]>(() =>
       card
       classname="item-container"
       :scroll="0"
+      @update:scrolled="scrolled => handleScrolled(scrolled, index)"
     >
       <template #default="{ scrolled }">
         <a
@@ -48,7 +61,7 @@ const items = computed<Item[]>(() =>
           <div
             class="cover"
             :style="{
-              backgroundImage: `url(${item.cover})`,
+              backgroundImage: `url(${isImgLoaded[index] ? item.cover : ''})`,
             }"
           />
           <div class="text">
