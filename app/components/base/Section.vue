@@ -11,6 +11,8 @@ const props = withDefaults(defineProps<SectionProps>(), {
   classname: "",
 })
 
+const emit = defineEmits(["update:scrolled"])
+
 const scrolled = ref(false)
 const sectionRef = ref<HTMLElement | null>(null)
 let observer: IntersectionObserver | null = null
@@ -21,6 +23,7 @@ onMounted(() => {
       const entry = entries[0]
       if (entry?.isIntersecting && !scrolled.value) {
         scrolled.value = true
+        emit("update:scrolled", true)
         observer?.unobserve(entry.target)
       }
     },

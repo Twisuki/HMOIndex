@@ -26,6 +26,10 @@ const serverItems = computed<ServerCard[]>(() =>
   server.value as ServerCard[],
 )
 
+const isImgLoaded = ref<boolean[]>(
+  serverItems.value?.map((_item, index) => (index <= 1)) ?? [],
+)
+
 const getServerDays = (dateStr: string) => {
   const dateRegex = /^\d{4}-\d{2}-\d{2}$/
   if (!dateRegex.test(dateStr)) {
@@ -43,6 +47,14 @@ const getServerDays = (dateStr: string) => {
 
   const diffInMs = todayTimestamp - timestamp
   return Math.round(diffInMs / (1000 * 60 * 60 * 24))
+}
+
+const handleScrolled = (scrlled: boolean, index: number) => {
+  if (scrlled) {
+    if (isImgLoaded.value[index + 2] !== undefined) {
+      isImgLoaded.value[index + 2] = true
+    }
+  }
 }
 </script>
 
@@ -64,6 +76,7 @@ const getServerDays = (dateStr: string) => {
         classname="item-container"
         card
         :scroll="0"
+        @update:scrolled="scrolled => handleScrolled(scrolled, index)"
       >
         <template #default="{ scrolled }">
           <a
@@ -74,7 +87,7 @@ const getServerDays = (dateStr: string) => {
             <div
               class="cover"
               :style="{
-                backgroundImage: `url(${item.cover})`,
+                backgroundImage: `url(${isImgLoaded[index] ? item.cover : ''})`,
               }"
             />
             <div class="content">
