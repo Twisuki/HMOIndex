@@ -84,12 +84,11 @@ const handleScrolled = (scrlled: boolean, index: number) => {
             :href="item.path"
             :class="{ scrolled }"
           >
-            <div
+            <img
+              :src="isImgLoaded[index] ? item.cover : ''"
+              :alt="item.title"
               class="cover"
-              :style="{
-                backgroundImage: `url(${isImgLoaded[index] ? item.cover : ''})`,
-              }"
-            />
+            >
             <div class="content">
               <div class="title">
                 {{ item.title }}
@@ -149,10 +148,8 @@ const handleScrolled = (scrlled: boolean, index: number) => {
   & .cover {
     height: 100%;
     aspect-ratio: 16 / 9;
-    background-image: none;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    object-fit: cover;
+    object-position: center;
   }
 
   & .content {

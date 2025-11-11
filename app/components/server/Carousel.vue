@@ -153,7 +153,7 @@ onBeforeUnmount(() => {
     background-color: rgba(0, 0, 0, 0.7);
     background-blend-mode: multiply;
     cursor: pointer;
-    transition: all 0.5s ease;
+    transition: background-image 0.5s ease;
 
     &.active {
       background-color: transparent;

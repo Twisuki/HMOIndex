@@ -4,7 +4,11 @@ defineProps<{ scrolled: boolean }>()
 
 <template>
   <div class="hero">
-    <div class="bg" />
+    <img
+      src="/images/cover.webp"
+      alt="cover"
+      class="bg"
+    >
 
     <div
       class="text"
@@ -29,11 +33,11 @@ defineProps<{ scrolled: boolean }>()
 
 .bg {
   width: 100%;
+  height: auto;
   aspect-ratio: 16 / 9;
-  background-image: url("/images/cover.webp");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 .text {

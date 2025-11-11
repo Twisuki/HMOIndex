@@ -19,12 +19,11 @@ const { data: page } = await useAsyncData(route.path, () => {
       </template>
     </BaseSection>
 
-    <div
+    <img
       class="cover"
-      :style="{
-        backgroundImage: `url(${page?.cover})`,
-      }"
-    />
+      :src="page?.cover"
+      alt="cover"
+    >
 
     <div class="title">
       <i class="fa-solid fa-play" />
@@ -83,10 +82,8 @@ const { data: page } = await useAsyncData(route.path, () => {
 .cover {
   width: 100%;
   aspect-ratio: 16 / 9;
-  background-image: none;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  object-fit: cover;
+  object-position: center;
 }
 
 .title {

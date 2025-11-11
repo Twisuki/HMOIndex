@@ -4,6 +4,10 @@ defineProps<{ scrolled: boolean }>()
 
 <template>
   <div class="hero">
+    <img
+      src="/images/cover.webp"
+      alt="cover"
+    >
     <div
       class="text"
       :class="{ scrolled }"
@@ -24,11 +28,17 @@ defineProps<{ scrolled: boolean }>()
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  background-image: url("/images/cover.webp");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
   overflow: hidden;
+}
+
+.hero img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .text {

@@ -105,14 +105,16 @@ onBeforeUnmount(() => {
           v-for="(item, index) in items"
           :key="index"
           class="carousel"
-          :style="{
-            backgroundImage: `url('${item.cover}')`,
-          }"
           :class="{ active: currentIndex === index }"
           @click="setIndex(index)"
           @mouseenter="handleMouseEnter(index)"
           @mouseleave="handleMouseLeave"
-        />
+        >
+          <img
+            :src="item.cover"
+            :alt="item.title"
+          >
+        </div>
       </div>
       <div class="content">
         <a
@@ -162,16 +164,18 @@ onBeforeUnmount(() => {
   & .carousel {
     width: 100%;
     aspect-ratio: 16 / 9;
-    background-image: none;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    background-color: rgba(0, 0, 0, 0.7);
-    background-blend-mode: multiply;
-    transition: background-color 2s ease;
 
-    &.active {
-      background-color: transparent;
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.3);
+      transition: filter 2s ease;
+    }
+
+    &.active img {
+      filter: brightness(1);
     }
   }
 }
