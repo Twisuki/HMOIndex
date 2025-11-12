@@ -6,12 +6,12 @@ const { data: page } = await useAsyncData(route.path, () => {
 
 console.log(page.value)
 
-// 自建api 搭建于aliyun 
+// 自建api 搭建于aliyun
 const PING_API_BASE = "http://47.121.127.41:4567/ping"
 
 const serverAddress = computed(() => page.value?.meta?.address as string | undefined)
 
-const { data: serverPing, pending: pingPending, error: pingError } = useFetch(() => {
+const { data: serverPing, pending: pingPending, error: pingError } = useFetch<MinecraftPingResponse>(() => {
   const address = serverAddress.value
   if (address) {
     return `${PING_API_BASE}?address=${address}`
@@ -81,54 +81,19 @@ const onlinePlayersList = computed(() => serverPing.value?.players?.onlinePlayer
         </a>
         <span v-else>暂无</span>
       </span>
-      <span
+      <ServerStatus
         v-if="serverAddress"
-        class="status"
-      >
-        服务器状态:
-        <i
-          v-if="pingPending"
-          class="fa-solid fa-spinner fa-spin"
-        />
-        <template v-else-if="isOnline">
-          <i
-            class="fa-solid fa-circle-check"
-            style="color: green;"
-          />
-          <span style="color: green;">在线 ({{ onlinePlayers }}/{{ maxPlayers }})</span>
-        </template>
-        <template v-else>
-          <i
-            class="fa-solid fa-circle-xmark"
-            style="color: red;"
-          />
-          <span style="color: red;">离线</span>
-        </template>
-      </span>
+        :is-online="isOnline"
+        :pending="pingPending"
+        :online-players="onlinePlayers"
+        :max-players="maxPlayers"
+      />
     </div>
 
-    <div
+    <ServerOnlinePlayers
       v-if="isOnline && onlinePlayersList.length > 0"
-      class="online-players"
-    >
-      <div class="player-title">
-        在线玩家 ({{ onlinePlayersList.length }})
-      </div>
-      <div class="player-list">
-        <div
-          v-for="player in onlinePlayersList"
-          :key="player.uuid"
-          class="player-item"
-        >
-          <img
-            :src="`https://nmsr.nickac.dev/head/${player.name}`"
-            :alt="player.name"
-            class="player-head"
-          >
-          <span class="player-name">{{ player.name }}</span>
-        </div>
-      </div>
-    </div>
+      :online-players-list="onlinePlayersList"
+    />
 
     <template v-if="page">
       <ContentRenderer
@@ -188,6 +153,7 @@ const onlinePlayersList = computed(() => serverPing.value?.players?.onlinePlayer
 .info {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   align-items: center;
   justify-content: start;
@@ -207,52 +173,15 @@ const onlinePlayersList = computed(() => serverPing.value?.players?.onlinePlayer
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 768px) {
   .info {
     flex-direction: column;
     align-items: flex-start;
   }
-}
 
-.online-players {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding-top: 0.5rem;
-}
-
-.player-title {
-  font-size: var(--title-size);
-  font-weight: bold;
-  color: var(--text-light);
-}
-
-.player-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.player-item {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
-  width: auto;
-}
-
-.player-head {
-  width: 30px;
-  height: 30px;
-  border-radius: 0;
-  object-fit: cover;
-  border: none;
-}
-
-.player-name {
-  font-size: var(--font-size);
-  color: var(--text-light);
-  text-align: left;
-  word-break: keep-all;
+  .info > span,
+  .info > .status {
+    width: 100%;
+  }
 }
 </style>
