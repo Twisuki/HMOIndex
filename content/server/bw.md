@@ -7,6 +7,7 @@ cover: "/images/cover.webp"
 date: "2025-05-07"
 ip: "bw.hmomc.cn"
 index: 4
+address: "mc.hmomc.cn:25573"
 ---
 
 ## 服务器介绍
