@@ -6,7 +6,7 @@ const { data: page } = await useAsyncData(route.path, () => {
 
 console.log(page.value)
 
-// 自建api 搭建于aliyun
+// 自建api 搭建于aliyun 
 const PING_API_BASE = "http://47.121.127.41:4567/ping"
 
 const serverAddress = computed(() => page.value?.meta?.address as string | undefined)
