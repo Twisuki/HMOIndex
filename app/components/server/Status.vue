@@ -1,32 +1,34 @@
 <script lang="ts" setup>
 import { computed } from "vue"
 
-const props = defineProps<{
+interface Props {
   isOnline: boolean
   pending: boolean
   onlinePlayers: number
   maxPlayers: number
-}>()
+}
+
+const props = defineProps<Props>()
 
 const statusInfo = computed(() => {
   if (props.pending) {
     return {
       text: "加载中...",
       iconClass: "fa-solid fa-spinner fa-spin",
-      color: "yellow" 
+      color: "yellow",
     }
   }
   if (props.isOnline) {
     return {
       text: `在线 (${props.onlinePlayers}/${props.maxPlayers})`,
       iconClass: "fa-solid fa-circle-check",
-      color: "green"
+      color: "green",
     }
   }
   return {
     text: "离线",
     iconClass: "fa-solid fa-circle-xmark",
-    color: "red"
+    color: "red",
   }
 })
 </script>
@@ -34,7 +36,7 @@ const statusInfo = computed(() => {
 <template>
   <span class="status">
     服务器状态:
-        <i
+    <i
       :class="statusInfo.iconClass"
       :style="{ color: statusInfo.color }"
     />

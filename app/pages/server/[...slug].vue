@@ -15,6 +15,7 @@ interface MinecraftPingResponse {
   }
   error?: string
 }
+
 const route = useRoute()
 const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection("server").path(route.path).first()
