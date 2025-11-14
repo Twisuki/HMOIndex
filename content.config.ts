@@ -29,7 +29,7 @@ export default defineContentConfig({
       type: "data",
       source: "cover.md",
       schema: z.object({
-        cover: z.array(z.object({
+        list: z.array(z.object({
           url: z.string().describe("封面url"),
           server: z.string().describe("所属服务器"),
           description: z.string().describe("封面描述(位置等)"),

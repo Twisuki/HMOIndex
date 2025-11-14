@@ -6,7 +6,7 @@ interface Cover {
 }
 
 const { data: cover } = await useAsyncData(() => {
-  return queryCollection("serverCover").first()
+  return queryCollection("serverCover").select("list").first()
 })
 
 const { data: server } = await useAsyncData(() => {
@@ -19,7 +19,7 @@ const { data: server } = await useAsyncData(() => {
 })
 
 const items = computed<Cover[]>(() =>
-  cover.value?.cover.map(item => ({
+  cover.value?.list.map(item => ({
     cover: item.url,
     server: server.value?.find(s => s.name === item.server)?.title || "",
     description: item.description,

@@ -1,5 +1,5 @@
 ---
-cover:
+list:
   - url: "/content/cover/origin_1.webp"
     server: "origin"
     description: "岳麓书院"

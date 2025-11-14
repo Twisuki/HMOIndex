@@ -72,12 +72,19 @@ const handleScrolled = (scrlled: boolean, index: number) => {
             </div>
             <div class="info">
               <span class="author">
-                <p
-                  v-for="(author, authorIndex) in item.authors"
-                  :key="authorIndex"
-                >
-                  {{ author }}
-                </p>
+                <BaseResponsive :breakpoints="420">
+                  <template #desktop>
+                    {{ item.authors.join(", ") }}
+                  </template>
+                  <template #tablet>
+                    <p
+                      v-for="(author, authorIndex) in item.authors"
+                      :key="authorIndex"
+                    >
+                      {{ author }}
+                    </p>
+                  </template>
+                </BaseResponsive>
               </span>
               <span class="date">
                 {{ item.date }}
