@@ -1,10 +1,54 @@
 <script lang="ts" setup>
+interface Player {
+  name: string
+  uuid: string
+}
+
+interface MinecraftPingResponse {
+  players?: {
+    online?: number
+    max?: number
+    onlinePlayers?: Player[]
+  }
+  description?: {
+    text?: string
+  }
+  error?: string
+}
+
 const route = useRoute()
 const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection("server").path(route.path).first()
 })
 
 console.log(page.value)
+
+// 自建api 搭建于aliyun
+const PING_API_BASE = "http://47.121.127.41:4567/ping"
+
+const serverAddress = computed(() => page.value?.meta?.address as string | undefined)
+
+const { data: serverPing, pending: pingPending, error: pingError } = useLazyFetch<MinecraftPingResponse>(() => {
+  const address = serverAddress.value
+  if (address) {
+    return `${PING_API_BASE}?address=${address}`
+  }
+  return undefined as unknown as string
+}, {
+  server: false,
+  watch: [serverAddress],
+  transform: (response) => {
+    if (response && typeof response === "object" && "error" in response) {
+      throw new Error(response.error as string)
+    }
+    return response
+  },
+})
+
+const isOnline = computed(() => !!serverPing.value && !pingError.value)
+const onlinePlayers = computed(() => serverPing.value?.players?.online || 0)
+const maxPlayers = computed(() => serverPing.value?.players?.max || 0)
+const onlinePlayersList = computed(() => serverPing.value?.players?.onlinePlayers || [])
 </script>
 
 <template>
@@ -52,7 +96,19 @@ console.log(page.value)
         </a>
         <span v-else>暂无</span>
       </span>
+      <ServerStatus
+        v-if="serverAddress"
+        :is-online="isOnline"
+        :pending="pingPending"
+        :online-players="onlinePlayers"
+        :max-players="maxPlayers"
+      />
     </div>
+
+    <ServerOnlinePlayers
+      v-if="isOnline && onlinePlayersList.length > 0"
+      :online-players-list="onlinePlayersList"
+    />
 
     <template v-if="page">
       <ContentRenderer
@@ -112,6 +168,7 @@ console.log(page.value)
 .info {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   align-items: center;
   justify-content: start;
@@ -131,10 +188,15 @@ console.log(page.value)
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 768px) {
   .info {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .info > span,
+  .info > .status {
+    width: 100%;
   }
 }
 </style>

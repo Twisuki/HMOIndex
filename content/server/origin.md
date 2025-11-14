@@ -8,6 +8,7 @@ date: "2025-02-06"
 map: "mc.hmomc.cn:25570"
 ip: "origin.hmomc.cn"
 index: 1
+address: "mc.hmomc.cn:25567"
 ---
 
 ## 新人须知
