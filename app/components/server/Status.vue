@@ -8,33 +8,37 @@ const props = defineProps<{
   maxPlayers: number
 }>()
 
-const statusText = computed(() => {
-  if (props.pending) return "加载中..."
-  if (props.isOnline) return `在线 (${props.onlinePlayers}/${props.maxPlayers})`
-  return "离线"
-})
-
-const statusIconClass = computed(() => {
-  if (props.pending) return "fa-solid fa-spinner fa-spin"
-  if (props.isOnline) return "fa-solid fa-circle-check"
-  return "fa-solid fa-circle-xmark"
-})
-
-const statusColor = computed(() => {
-  if (props.pending) return "var(--text-light)"
-  if (props.isOnline) return "green"
-  return "red"
+const statusInfo = computed(() => {
+  if (props.pending) {
+    return {
+      text: "加载中...",
+      iconClass: "fa-solid fa-spinner fa-spin",
+      color: "yellow" 
+    }
+  }
+  if (props.isOnline) {
+    return {
+      text: `在线 (${props.onlinePlayers}/${props.maxPlayers})`,
+      iconClass: "fa-solid fa-circle-check",
+      color: "green"
+    }
+  }
+  return {
+    text: "离线",
+    iconClass: "fa-solid fa-circle-xmark",
+    color: "red"
+  }
 })
 </script>
 
 <template>
   <span class="status">
     服务器状态:
-    <i
-      :class="statusIconClass"
-      :style="{ color: statusColor }"
+        <i
+      :class="statusInfo.iconClass"
+      :style="{ color: statusInfo.color }"
     />
-    <span :style="{ color: statusColor }">{{ statusText }}</span>
+    <span :style="{ color: statusInfo.color }">{{ statusInfo.text }}</span>
   </span>
 </template>
 

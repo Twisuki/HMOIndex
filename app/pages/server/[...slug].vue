@@ -1,4 +1,20 @@
 <script lang="ts" setup>
+interface Player {
+  name: string
+  uuid: string
+}
+
+interface MinecraftPingResponse {
+  players?: {
+    online?: number
+    max?: number
+    onlinePlayers?: Player[]
+  }
+  description?: {
+    text?: string
+  }
+  error?: string
+}
 const route = useRoute()
 const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection("server").path(route.path).first()
@@ -11,19 +27,18 @@ const PING_API_BASE = "http://47.121.127.41:4567/ping"
 
 const serverAddress = computed(() => page.value?.meta?.address as string | undefined)
 
-const { data: serverPing, pending: pingPending, error: pingError } = useFetch<MinecraftPingResponse>(() => {
+const { data: serverPing, pending: pingPending, error: pingError } = useLazyFetch<MinecraftPingResponse>(() => {
   const address = serverAddress.value
   if (address) {
     return `${PING_API_BASE}?address=${address}`
   }
-  return null
+  return undefined as unknown as string
 }, {
   server: false,
-  lazy: true,
   watch: [serverAddress],
   transform: (response) => {
     if (response && typeof response === "object" && "error" in response) {
-      throw new Error(response.error)
+      throw new Error(response.error as string)
     }
     return response
   },
@@ -32,7 +47,6 @@ const { data: serverPing, pending: pingPending, error: pingError } = useFetch<Mi
 const isOnline = computed(() => !!serverPing.value && !pingError.value)
 const onlinePlayers = computed(() => serverPing.value?.players?.online || 0)
 const maxPlayers = computed(() => serverPing.value?.players?.max || 0)
-const _motd = computed(() => serverPing.value?.description?.text || "服务器离线")
 const onlinePlayersList = computed(() => serverPing.value?.players?.onlinePlayers || [])
 </script>
 
