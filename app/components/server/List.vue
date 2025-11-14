@@ -131,7 +131,6 @@ const handleScrolled = (scrlled: boolean, index: number) => {
 
 .item {
   width: 100%;
-  height: 10rem;
   display: flex;
   gap: var(--padding-y);
   text-decoration: none;
@@ -146,7 +145,7 @@ const handleScrolled = (scrlled: boolean, index: number) => {
   }
 
   & .cover {
-    height: 100%;
+    height: 10rem;
     aspect-ratio: 16 / 9;
     object-fit: cover;
     object-position: center;
@@ -184,13 +183,13 @@ const handleScrolled = (scrlled: boolean, index: number) => {
 }
 
 @media (max-width: 768px) {
-  .item {
+  .item .cover {
     height: 8rem;
   }
 }
 
 @media (max-width: 640px) {
-  .item {
+  .item .cover {
     height: 6rem;
   }
 }
@@ -200,6 +199,11 @@ const handleScrolled = (scrlled: boolean, index: number) => {
     flex-direction: column;
     width: 100%;
     height: auto;
+
+    & .cover {
+      width: 100%;
+      height: auto;
+    }
   }
 }
 </style>
