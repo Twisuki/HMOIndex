@@ -3,7 +3,7 @@ export interface Item {
   title: string
   description: string
   date: string
-  author: string
+  authors: string[]
   cover: string
   path: string
 }
@@ -18,7 +18,7 @@ const { data: dynamic } = await useAsyncData(() => {
       "title",
       "description",
       "date",
-      "author",
+      "authors",
       "cover",
       "path",
     )
@@ -72,7 +72,12 @@ const handleScrolled = (scrlled: boolean, index: number) => {
             </div>
             <div class="info">
               <span class="author">
-                {{ item.author }}
+                <p
+                  v-for="(author, authorIndex) in item.authors"
+                  :key="authorIndex"
+                >
+                  {{ author }}
+                </p>
               </span>
               <span class="date">
                 {{ item.date }}

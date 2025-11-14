@@ -9,7 +9,7 @@ export default defineContentConfig({
         date: z.string().describe("动态发布日期"),
         index: z.number().describe("同日序号"),
         cover: z.string().describe("封面url"),
-        author: z.string().describe("作者"),
+        authors: z.array(z.string()).describe("作者"),
       }),
     }),
     server: defineCollection({
