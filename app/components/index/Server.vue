@@ -76,7 +76,7 @@ onBeforeUnmount(() => {
           backgroundImage: `url(${serverItems[currentIndex]?.cover})`,
         }"
       >
-        <div class="text">
+        <div class="content">
           <div class="title">
             {{ serverItems[currentIndex]?.title }}
           </div>
@@ -134,7 +134,7 @@ onBeforeUnmount(() => {
   background-size: cover;
   transition: all 2s ease;
 
-  & .text {
+  & .content {
     position: absolute;
     right: var(--padding-y);
     bottom: var(--padding-y);
@@ -205,13 +205,13 @@ onBeforeUnmount(() => {
 }
 
 @media (max-width: 1024px) {
-  .server-card .text {
+  .server-card .content {
     width: 50%;
   }
 }
 
 @media (max-width: 640px) {
-  .server-card .text {
+  .server-card .content {
     position: absolute;
     right: 0;
     top: 0;
@@ -230,7 +230,7 @@ onBeforeUnmount(() => {
 }
 
 @media (max-width: 420px) {
-  .server-card .text {
+  .server-card .content {
     width: 75%;
   }
 

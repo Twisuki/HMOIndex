@@ -63,7 +63,7 @@ const handleScrolled = (scrlled: boolean, index: number) => {
             :alt="item.title"
             class="cover"
           >
-          <div class="text">
+          <div class="content">
             <div class="title">
               {{ item.title }}
             </div>
@@ -126,7 +126,7 @@ const handleScrolled = (scrlled: boolean, index: number) => {
     object-position: center;
   }
 
-  & .text {
+  & .content {
     flex: 1;
     height: 100%;
     display: flex;

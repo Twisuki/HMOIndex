@@ -11,7 +11,7 @@ defineProps<{ scrolled: boolean }>()
     >
 
     <div
-      class="text"
+      class="content"
       :class="{ scrolled }"
     >
       <div class="title">
@@ -40,7 +40,7 @@ defineProps<{ scrolled: boolean }>()
   display: block;
 }
 
-.text {
+.content {
   width: 100%;
   margin-top: var(--padding-y);
   padding: var(--padding-y);
@@ -65,7 +65,7 @@ defineProps<{ scrolled: boolean }>()
   }
 }
 
-.text.scrolled {
+.content.scrolled {
   & .title {
     transform: translateY(0);
     opacity: 1;
