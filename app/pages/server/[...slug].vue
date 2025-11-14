@@ -29,8 +29,7 @@ const { data: serverPing, pending: pingPending, error: pingError } = useLazyFetc
   const address = serverAddress.value
   if (address) {
     const [host, port] = address.split(":")
-    const url = `/api/server/status?host=${host}` + (port ? `&port=${port}` : "")
-    return url
+    return `/api/server/status?host=${host}` + (port ? `&port=${port}` : "")
   }
   return undefined as unknown as string
 }, {
@@ -197,8 +196,7 @@ const onlinePlayersList = computed(() => serverPing.value?.players?.onlinePlayer
     align-items: flex-start;
   }
 
-  .info > span,
-  .info > .status {
+  .info > span {
     width: 100%;
   }
 }
