@@ -37,7 +37,7 @@ const { data: page } = await useAsyncData(route.path, () => {
       </span>
       <span class="author">
         <i class="fa-solid fa-user" />
-        {{ page?.author }}
+        {{ page?.authors.join(", ") }}
       </span>
     </div>
 
@@ -102,5 +102,16 @@ const { data: page } = await useAsyncData(route.path, () => {
   gap: 1rem;
   align-items: center;
   justify-content: start;
+}
+
+@media (max-width: 768px) {
+  .info {
+    flex-direction: column;
+    align-items: flex-start;
+
+    & span {
+      width: 100%;
+    }
+  }
 }
 </style>

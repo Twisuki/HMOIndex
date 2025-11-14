@@ -9,7 +9,7 @@ defineProps<{ scrolled: boolean }>()
       alt="cover"
     >
     <div
-      class="text"
+      class="content"
       :class="{ scrolled }"
     >
       <div class="title">
@@ -41,7 +41,7 @@ defineProps<{ scrolled: boolean }>()
   object-position: center;
 }
 
-.text {
+.content {
   position: absolute;
   right: var(--padding-y);
   bottom: var(--padding-y);
@@ -68,7 +68,7 @@ defineProps<{ scrolled: boolean }>()
   }
 }
 
-.text.scrolled {
+.content.scrolled {
   & .title {
     transform: translateX(0);
     opacity: 1;

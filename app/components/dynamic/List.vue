@@ -3,7 +3,7 @@ export interface Item {
   title: string
   description: string
   date: string
-  author: string
+  authors: string[]
   cover: string
   path: string
 }
@@ -18,7 +18,7 @@ const { data: dynamic } = await useAsyncData(() => {
       "title",
       "description",
       "date",
-      "author",
+      "authors",
       "cover",
       "path",
     )
@@ -63,7 +63,7 @@ const handleScrolled = (scrlled: boolean, index: number) => {
             :alt="item.title"
             class="cover"
           >
-          <div class="text">
+          <div class="content">
             <div class="title">
               {{ item.title }}
             </div>
@@ -72,7 +72,19 @@ const handleScrolled = (scrlled: boolean, index: number) => {
             </div>
             <div class="info">
               <span class="author">
-                {{ item.author }}
+                <BaseResponsive :breakpoints="420">
+                  <template #desktop>
+                    {{ item.authors.join(", ") }}
+                  </template>
+                  <template #tablet>
+                    <p
+                      v-for="(author, authorIndex) in item.authors"
+                      :key="authorIndex"
+                    >
+                      {{ author }}
+                    </p>
+                  </template>
+                </BaseResponsive>
               </span>
               <span class="date">
                 {{ item.date }}
@@ -126,7 +138,7 @@ const handleScrolled = (scrlled: boolean, index: number) => {
     object-position: center;
   }
 
-  & .text {
+  & .content {
     flex: 1;
     height: 100%;
     display: flex;

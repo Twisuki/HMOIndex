@@ -3,7 +3,7 @@ export interface Item {
   title: string
   description: string
   date: string
-  author: string
+  authors: string[]
   cover: string
   path: string
 }
@@ -16,7 +16,7 @@ const { data: dynamic } = await useAsyncData(() => {
       "title",
       "description",
       "date",
-      "author",
+      "authors",
       "cover",
       "path",
     )
@@ -128,7 +128,19 @@ onBeforeUnmount(() => {
         </div>
         <div class="info">
           <span class="author">
-            {{ items[currentIndex]?.author }}
+            <BaseResponsive :breakpoints="420">
+              <template #desktop>
+                {{ items[currentIndex]?.authors.join(", ") }}
+              </template>
+              <template #tablet>
+                <p
+                  v-for="(author, authorIndex) in items[currentIndex]?.authors"
+                  :key="authorIndex"
+                >
+                  {{ author }}
+                </p>
+              </template>
+            </BaseResponsive>
           </span>
           <span class="date">
             {{ items[currentIndex]?.date }}

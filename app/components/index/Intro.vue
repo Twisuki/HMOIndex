@@ -36,13 +36,16 @@ const buttonItems: ButtonItem[] = [
 
 <template>
   <BaseSection
-    :scroll="0.75"
+    :scroll="0.5"
     classname="intro-container"
     card
   >
     <template #default="{ scrolled }">
       <div class="intro">
-        <div class="text">
+        <div
+          class="content"
+          :class="{ scrolled }"
+        >
           <p>
             这里是湖南大学校级社团Minecraft岳麓幻境社, 欢迎湖南高校学子共建的Minecraft高校圈!
           </p>
@@ -89,9 +92,17 @@ const buttonItems: ButtonItem[] = [
   margin-top: 1rem;
 }
 
-.text {
+.content {
   text-align: center;
   font-size: var(--font-size);
+  transform: translateY(100%);
+  opacity: 0;
+  transition: 1s all ease;
+}
+
+.content.scrolled {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .button {
