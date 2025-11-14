@@ -13,7 +13,7 @@ const statusInfo = computed(() => {
     return {
       text: "加载中...",
       iconClass: "fa-solid fa-spinner fa-spin",
-      color: "yellow" 
+      color: "yellow"
     }
   }
   if (props.isOnline) {

@@ -22,15 +22,14 @@ const { data: page } = await useAsyncData(route.path, () => {
 
 console.log(page.value)
 
-// 自建api 搭建于aliyun
-const PING_API_BASE = "http://47.121.127.41:4567/ping"
-
 const serverAddress = computed(() => page.value?.meta?.address as string | undefined)
 
 const { data: serverPing, pending: pingPending, error: pingError } = useLazyFetch<MinecraftPingResponse>(() => {
   const address = serverAddress.value
   if (address) {
-    return `${PING_API_BASE}?address=${address}`
+    const [host, port] = address.split(":")
+    const url = `/api/server/status?host=${host}` + (port ? `&port=${port}` : "")
+    return url
   }
   return undefined as unknown as string
 }, {
@@ -95,19 +94,23 @@ const onlinePlayersList = computed(() => serverPing.value?.players?.onlinePlayer
         </a>
         <span v-else>暂无</span>
       </span>
-      <ServerStatus
-        v-if="serverAddress"
-        :is-online="isOnline"
-        :pending="pingPending"
-        :online-players="onlinePlayers"
-        :max-players="maxPlayers"
-      />
+      <ClientOnly>
+        <ServerStatus
+          v-if="serverAddress"
+          :is-online="isOnline"
+          :pending="pingPending"
+          :online-players="onlinePlayers"
+          :max-players="maxPlayers"
+        />
+      </ClientOnly>
     </div>
 
-    <ServerOnlinePlayers
-      v-if="isOnline && onlinePlayersList.length > 0"
-      :online-players-list="onlinePlayersList"
-    />
+    <ClientOnly>
+      <ServerOnlinePlayers
+        v-if="isOnline && onlinePlayersList.length > 0"
+        :online-players-list="onlinePlayersList"
+      />
+    </ClientOnly>
 
     <template v-if="page">
       <ContentRenderer
