@@ -21,8 +21,6 @@ const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection("server").path(route.path).first()
 })
 
-console.log(page.value)
-
 // 自建api 搭建于aliyun
 const PING_API_BASE = "http://47.121.127.41:4567/ping"
 
@@ -192,11 +190,10 @@ const onlinePlayersList = computed(() => serverPing.value?.players?.onlinePlayer
   .info {
     flex-direction: column;
     align-items: flex-start;
-  }
 
-  .info > span,
-  .info > .status {
-    width: 100%;
+    & span {
+      width: 100%;
+    }
   }
 }
 </style>
