@@ -195,8 +195,9 @@ const onlinePlayersList = computed(() => serverPing.value?.players?.onlinePlayer
     flex-direction: column;
     align-items: flex-start;
 
-  .info > span {
-    width: 100%;
+    & span {
+      width: 100%;
+    }
   }
 }
 </style>
