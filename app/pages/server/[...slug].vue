@@ -21,8 +21,6 @@ const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection("server").path(route.path).first()
 })
 
-console.log(page.value)
-
 const serverAddress = computed(() => page.value?.meta?.address as string | undefined)
 
 const { data: serverPing, pending: pingPending, error: pingError } = useLazyFetch<MinecraftPingResponse>(() => {
