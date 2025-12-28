@@ -21,7 +21,7 @@ const buttonItems: ButtonItem[] = [
   },
   {
     label: "直播间",
-    to: "https://live.bilibili.com/13169648",
+    to: "https://live.bilibili.com/1713829437",
     color: "#5cdfff",
     newTab: true,
   },
