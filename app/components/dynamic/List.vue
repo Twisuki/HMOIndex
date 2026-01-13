@@ -8,7 +8,7 @@ export interface Item {
   path: string
 }
 
-const skipedCount = 5
+const skippedCount = 5
 
 const { data: dynamic } = await useAsyncData(() => {
   return queryCollection("dynamic")
@@ -26,7 +26,7 @@ const { data: dynamic } = await useAsyncData(() => {
 })
 
 const items = computed<Item[]>(() =>
-  dynamic.value?.slice(skipedCount) as Item[],
+  dynamic.value?.slice(skippedCount) as Item[],
 )
 
 const isImgLoaded = ref<boolean[]>(
