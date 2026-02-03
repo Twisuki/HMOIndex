@@ -56,6 +56,8 @@ export interface MinecraftStatus {
 export async function pingMinecraftServer(host: string, port: number, timeout: number = 5000): Promise<MinecraftStatus> {
   const startTime = Date.now()
   let socket: net.Socket | null = null
+  let accumulatedData = Buffer.alloc(0)
+  let expectedLength = -1
 
   const defaultStatus: MinecraftStatus = {
     online: false,
@@ -108,11 +110,32 @@ export async function pingMinecraftServer(host: string, port: number, timeout: n
       }
     })
 
-    socket.on("data", (data) => {
+    socket.on("data", (chunk) => {
+      accumulatedData = Buffer.concat([accumulatedData, chunk])
+
       try {
+        if (expectedLength === -1) {
+          // 尝试读取数据包长度 (VarInt)
+          // VarInt 最长 5 字节，但通常 1-3 字节。如果没有足够数据读取完整的 VarInt，则等待。
+          try {
+            const { value: packetLength, length: lengthLength } = readVarInt(accumulatedData, 0)
+            expectedLength = packetLength + lengthLength
+          }
+          catch (e) {
+            // 数据不足以解析 VarInt，继续等待
+            return
+          }
+        }
+
+        if (accumulatedData.length < expectedLength) {
+          // 数据未接收完整，继续等待
+          return
+        }
+
+        const data = accumulatedData
         const latency = Date.now() - startTime
 
-        // 1. 读取数据包长度 (VarInt)
+        // 1. 重新读取数据包长度 (VarInt)
         const { value: _packetLength, length: lengthLength } = readVarInt(data, 0)
 
         // 2. 读取数据包 ID (VarInt)
@@ -153,6 +176,11 @@ export async function pingMinecraftServer(host: string, port: number, timeout: n
         cleanup(status)
       }
       catch (e) {
+        // 如果是解析 JSON 出错，可能是数据还没接收完或者数据真的有问题
+        if (e instanceof SyntaxError && accumulatedData.length < expectedLength) {
+          // 理论上上面已经检查了 length，但万一呢
+          return
+        }
         console.error("Error processing server response:", e)
         cleanup(defaultStatus)
       }
