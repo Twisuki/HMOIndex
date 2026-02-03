@@ -5,9 +5,8 @@ intro: "老发聊发少年狂, pvp玩起床, 经典, 也是当年模样. 湖大�
 description: "举办起床战争赛事时使用的服务器."
 cover: "/images/cover.webp"
 date: "2025-05-07"
-ip: "bw.hmomc.cn"
 index: 4
-address: "mc.hmomc.cn:25573"
+address: "bw.hmomc.cn"
 ---
 
 ## 服务器介绍

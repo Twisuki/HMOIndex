@@ -5,7 +5,6 @@ intro: "天空从来不是极限, 美食也能到达更远的天际! 机械动�
 description: ""
 cover: "/content/server/cover_cis.webp"
 date: "2025-08-28"
-ip: "modpack.hmomc.cn"
 index: 6
-address: "mc.hmomc.cn:25582"
+# address: "mc.hmomc.cn:25582"
 ---

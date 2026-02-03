@@ -5,10 +5,11 @@ intro: "以生电, 建造玩法为核心, 生电佬交流中心, 社团重要线
 description: "湖大起源服是由 Minecraft 岳麓幻境社开设的 Purpur 端类原版 Minecraft 服务器, 主要玩法为生存与建筑, 服务端版本 1.21.1."
 cover: "/content/server/cover_origin.webp"
 date: "2025-02-06"
-map: "mc.hmomc.cn:25570"
-ip: "origin.hmomc.cn"
+map: "a.hmomc.cn:25570"
 index: 1
-address: "mc.hmomc.cn:25567"
+address: 
+  - "a.origin.hmomc.cn"
+  - "b.origin.hmomc.cn"
 ---
 
 ## 新人须知

@@ -6,5 +6,7 @@ description: ""
 cover: "/content/server/cover_rebuild.webp"
 date: "2025-04-15"
 index: 3
-address: "mc.hmomc.cn:25572"
+address:
+  - "a.creative.hmomc.cn"
+  - "b.creative.hmomc.cn"
 ---
