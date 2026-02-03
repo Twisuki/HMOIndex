@@ -5,7 +5,7 @@ intro: "厌倦了996的生活? 那就一起来玩生!存!乐!事! 更多结构, 
 description: ""
 cover: "/content/server/cover_sd.webp"
 date: "2025-08-29"
-map: "mc.hmomc.cn:25585"
+map: "a.hmomc.cn:25585"
 index: 5
 address: 
   - "a.survival-delight.hmomc.cn"
