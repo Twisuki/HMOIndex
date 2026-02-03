@@ -14,7 +14,7 @@ export default defineContentConfig({
     }),
     server: defineCollection({
       type: "page",
-      source: "server/**/*.md",
+      source: "server/*.md",
       schema: z.object({
         name: z.string().describe("服务器代号"),
         intro: z.string().describe("服务器简介(艺术向)"),
