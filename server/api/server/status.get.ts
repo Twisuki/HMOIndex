@@ -3,24 +3,15 @@ import { resolveSrv, Resolver } from "node:dns/promises"
 import { pingMinecraftServer } from "../../utils/minecraftPinger"
 
 interface ServerQuery {
-  host: string
+  host: string | string[]
   port?: string
 }
 
-export default defineEventHandler(async (event) => {
-  const { host, port } = getQuery<ServerQuery>(event)
+async function getSingleServerStatus(hostAndPort: string, queryPort?: string) {
+  let [serverHost, portStr] = hostAndPort.split(":")
+  let serverPort = portStr ? parseInt(portStr) : (queryPort ? parseInt(queryPort) : 25565)
 
-  if (!host) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: "Missing host parameter",
-    })
-  }
-
-  let serverHost = host
-  let serverPort = port ? parseInt(port) : 25565
-
-  if (!port) {
+  if (!portStr && !queryPort) {
     const handleSrvRecords = (records: any[]) => {
       if (records && records.length > 0) {
         records.sort((a, b) => {
@@ -37,15 +28,15 @@ export default defineEventHandler(async (event) => {
     }
 
     try {
-      const records = await resolveSrv(`_minecraft._tcp.${host}`)
+      const records = await resolveSrv(`_minecraft._tcp.${serverHost}`)
       handleSrvRecords(records)
     }
     catch (e) {
-      console.warn(`[SRV Lookup] Default resolution failed for ${host}, trying public DNS...`)
+      console.warn(`[SRV Lookup] Default resolution failed for ${serverHost}, trying public DNS...`)
       try {
         const resolver = new Resolver()
         resolver.setServers(["223.5.5.5", "8.8.8.8"])
-        const records = await resolver.resolveSrv(`_minecraft._tcp.${host}`)
+        const records = await resolver.resolveSrv(`_minecraft._tcp.${serverHost}`)
         handleSrvRecords(records)
       }
       catch {
@@ -54,23 +45,50 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  const status = await pingMinecraftServer(serverHost, serverPort)
+  return await pingMinecraftServer(serverHost, serverPort)
+}
 
-  if (status.online) {
-    return {
-      players: {
-        online: status.current_players,
-        max: status.max_players,
-        onlinePlayers: status.players,
-      },
-      description: {
-        text: status.motd,
-      },
+export default defineEventHandler(async (event) => {
+  const query = getQuery<ServerQuery>(event)
+  const hostParam = query.host
+  const port = query.port
+
+  if (!hostParam) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: "Missing host parameter",
+    })
+  }
+
+  const hosts = Array.isArray(hostParam) ? hostParam : hostParam.split(",")
+
+  let lastError = "All servers are offline"
+  
+  // Try each host until one is online
+  for (const host of hosts) {
+    try {
+      const status = await getSingleServerStatus(host.trim(), port)
+      if (status.online) {
+        return {
+          players: {
+            online: status.current_players,
+            max: status.max_players,
+            onlinePlayers: status.players,
+          },
+          description: {
+            text: status.motd,
+          },
+        }
+      }
+      else {
+        lastError = status.motd || lastError
+      }
+    } catch (e: any) {
+      lastError = e.message || lastError
     }
   }
-  else {
-    return {
-      error: status.motd,
-    }
+
+  return {
+    error: lastError,
   }
 })

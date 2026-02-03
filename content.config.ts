@@ -14,7 +14,7 @@ export default defineContentConfig({
     }),
     server: defineCollection({
       type: "page",
-      source: "server/*.md",
+      source: "server/**/*.md",
       schema: z.object({
         name: z.string().describe("服务器代号"),
         intro: z.string().describe("服务器简介(艺术向)"),
@@ -22,7 +22,7 @@ export default defineContentConfig({
         date: z.string().describe("开服日期"),
         map: z.string().nullable().describe("网页地图url"),
         index: z.number().describe("序号"),
-        ip: z.string().describe("服务器地址"),
+        address: z.union([z.string(), z.array(z.string())]).describe("服务器地址"),
       }),
     }),
     serverCover: defineCollection({

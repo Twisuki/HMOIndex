@@ -21,13 +21,19 @@ const { data: page } = await useAsyncData(route.path, () => {
   return queryCollection("server").path(route.path).first()
 })
 
-const serverAddress = computed(() => page.value?.meta?.address as string | undefined)
+const serverAddress = computed(() => {
+  const address = page.value?.address
+  if (Array.isArray(address)) {
+    return address.join(",")
+  }
+  return address as string | undefined
+})
 
 const { data: serverPing, pending: pingPending, error: pingError } = useLazyFetch<MinecraftPingResponse>(() => {
   const address = serverAddress.value
   if (address) {
-    const [host, port] = address.split(":")
-    return `/api/server/status?host=${host}` + (port ? `&port=${port}` : "")
+    // 我们的 API 现在支持逗号分隔的多个地址
+    return `/api/server/status?host=${address}`
   }
   return undefined as unknown as string
 }, {
@@ -111,9 +117,7 @@ const onlinePlayersList = computed(() => serverPing.value?.players?.onlinePlayer
     </ClientOnly>
 
     <template v-if="page">
-      <ContentRenderer
-        :value="page"
-      />
+      <ContentRenderer :value="page" />
     </template>
     <template v-else>
       页面未找到
