@@ -98,6 +98,14 @@ const onlinePlayersList = computed(() => serverPing.value?.players?.onlinePlayer
         </a>
         <span v-else>暂无</span>
       </span>
+      <span
+        v-if="page?.name !== 'join'"
+        class="join"
+      >
+        入服指南:
+        <i class="fa-solid fa-book" />
+        <a href="https://docs.qq.com/aio/p/scw3wwi5x2tslm9?p=homViskRsqkXC8nDU2h6HY">点击查看</a>
+      </span>
       <ClientOnly>
         <ServerStatus
           v-if="serverAddress"
