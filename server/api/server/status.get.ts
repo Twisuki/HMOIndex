@@ -63,7 +63,7 @@ export default defineEventHandler(async (event) => {
   const hosts = Array.isArray(hostParam) ? hostParam : hostParam.split(",")
 
   let lastError = "All servers are offline"
-  
+
   // Try each host until one is online
   for (const host of hosts) {
     try {
@@ -83,7 +83,8 @@ export default defineEventHandler(async (event) => {
       else {
         lastError = status.motd || lastError
       }
-    } catch (e: any) {
+    }
+    catch (e: any) {
       lastError = e.message || lastError
     }
   }
