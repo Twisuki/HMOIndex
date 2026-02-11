@@ -1,12 +1,12 @@
 ---
 name: "sd"
 title: "生存乐事"
-intro: "厌倦了996的生活? 那就一起来玩生!存!乐!事! 更多结构, 更多冒险, 更多社交, 还有更多品类的菜品等你发现! 要养老, 就来生存乐事!"
+intro: "肝不动复杂的整合包, 简单的mod + 原版体验更加适合你! 超多生物群系, 农夫乐事及大量附属, 还有原版生存体验, 这是岳麓幻境社的招牌服务器!"
 description: ""
 cover: "/content/server/cover_sd.webp"
 date: "2025-08-29"
 map: "a.hmomc.cn:25585"
-index: 5
+index: 2
 address: 
   - "a.survival-delight.hmomc.cn"
   - "b.survival-delight.hmomc.cn"
