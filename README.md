@@ -28,17 +28,28 @@
 
 ```
 [root]
-├─ app                   # 应用目录
-│  ├─ assets             # 资源目录(样式文件)
-│  ├─ components         # 组件目录
-│  ├─ layouts            # 布局目录
-│  ├─ pages              # 页面目录
+├─ app                                       # 应用目录
+│  ├─ assets                                 # 资源目录(样式文件)
+│  ├─ components                             # 组件目录
+│  ├─ layouts                                # 布局目录
+│  ├─ pages                                  # 页面目录
 │  └─ app.vue
-├─ content               # 内容目录 (存放 nuxt-content 的 md 文件)
-├─ public                # 公共资源目录(静态资源)
-├─ content.config.ts     # nuxt-content 配置文件
-├─ eslint.config.mjs     # eslint 配置文件
-├─ nuxt.config.ts        # nuxt 配置文件
+├─ content                                   # 内容目录 (存放 nuxt-content 的 md 文件)
+│  ├─ dynamic/yyyymmdd-[index].md            # 动态内容
+│  ├─ server/[servername].md                 # 服务器内容
+│  └─ cover.md                               # 服务器封面图集内容
+├─ public                                    # 公共资源目录(静态资源)
+│  ├─ content                                # 内容相关图片目录
+│  │  ├─ cover/[servername]_[name].webp      # 服务器封面图集图片
+│  │  ├─ dynamic
+│  │  │  ├─ cover_yyyymmdd-[index].webp      # 动态封面图片
+│  │  │  └─ yyyymmdd-[index]_[name].webp     # 动态其他图片
+│  │  └─ server/cover_[servername].webp      # 服务器封面图片
+│  ├─ images                                 # 其他图片目录
+│  └─ ...
+├─ content.config.ts                         # nuxt-content 配置文件
+├─ eslint.config.mjs                         # eslint 配置文件
+├─ nuxt.config.ts                            # nuxt 配置文件
 └─ ...
 ```
 
@@ -74,6 +85,8 @@
 
 所有内容分发均在 `content` 目录下, 通过编辑 `md` 文件导入.
 
+所有图片请压缩成 `.webp` 格式再上传, 以节省空间和带宽.
+
 ### 4.1 动态页面
 
 "动态"位于 `content/dynamic` 目录下, 命名格式为 `yyyymmdd-[index].md`, 例如 `20251108-1.md`.
@@ -91,7 +104,7 @@ author: "作者"
 
 _具体 front-matter 信息详见 `content.config.ts`._
 
-动态图片统一放置在 `public/images/dynamic/` 目录下, 封面命名为 `cover_yyyymmddd-[index].[png\jpg]`, 其他图片命名为 `yyyymmdd-[index]_[name].[png/jpg]`.
+动态图片统一放置在 `public/images/dynamic/` 目录下, 封面命名为 `cover_yyyymmddd-[index].webp`, 其他图片命名为 `yyyymmdd-[index]_[name].webp`.
 
 ### 4.2 服务器页面
 
@@ -113,7 +126,7 @@ index: "展示顺序"
 
 _具体 front-matter 信息详见 `content.config.ts`._
 
-服务器图片统一放置在 `public/images/server/` 目录下, 封面命名为 `cover_[servername].[png/jpg]`, 其他图片命名为 `[servername]_[name].[png/jpg]`.
+服务器图片统一放置在 `public/images/server/` 目录下, 封面命名为 `cover_[servername].webp`, 其他图片命名为 `[servername]_[name].webp`.
 
 ### 4.3 服务器封面图集
 
@@ -131,4 +144,4 @@ cover:
 
 _具体 front-matter 信息详见 `content.config.ts`._
 
-图集图片放在在 `public/content/cover/` 目录下, 命名格式为 `[servername]_[index].[png/jpg]`, 例如 `origin_1.jpg`, `classic_2.jpg`.
+图集图片放在在 `public/content/cover/` 目录下, 命名格式为 `[servername]_[name].[png/jpg]`, 例如 `origin_pagoda.webp`, `rebuild_library.webp`.
