@@ -10,6 +10,7 @@ useHead({
     <IndexIntro />
     <IndexServer />
     <IndexDynamic />
+    <IndexDonate />
   </div>
 </template>
 
