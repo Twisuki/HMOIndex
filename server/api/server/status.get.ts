@@ -8,11 +8,12 @@ interface ServerQuery {
 }
 
 async function getSingleServerStatus(hostAndPort: string, queryPort?: string) {
-  let [serverHost, portStr] = hostAndPort.split(":")
+  const [host, portStr] = hostAndPort.split(":")
+  let serverHost = host
   let serverPort = portStr ? parseInt(portStr) : (queryPort ? parseInt(queryPort) : 25565)
 
   if (!portStr && !queryPort) {
-    const handleSrvRecords = (records: any[]) => {
+    const handleSrvRecords = (records: { name: string, port: number, priority: number, weight: number }[]) => {
       if (records && records.length > 0) {
         records.sort((a, b) => {
           if (a.priority !== b.priority) {
@@ -31,7 +32,7 @@ async function getSingleServerStatus(hostAndPort: string, queryPort?: string) {
       const records = await resolveSrv(`_minecraft._tcp.${serverHost}`)
       handleSrvRecords(records)
     }
-    catch (e) {
+    catch {
       console.warn(`[SRV Lookup] Default resolution failed for ${serverHost}, trying public DNS...`)
       try {
         const resolver = new Resolver()
@@ -84,8 +85,8 @@ export default defineEventHandler(async (event) => {
         lastError = status.motd || lastError
       }
     }
-    catch (e: any) {
-      lastError = e.message || lastError
+    catch (e: unknown) {
+      lastError = e instanceof Error ? e.message : lastError
     }
   }
 

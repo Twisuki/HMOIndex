@@ -121,7 +121,7 @@ export async function pingMinecraftServer(host: string, port: number, timeout: n
             const { value: packetLength, length: lengthLength } = readVarInt(accumulatedData, 0)
             expectedLength = packetLength + lengthLength
           }
-          catch (e) {
+          catch {
             // 数据不足以解析 VarInt，继续等待
             return
           }
