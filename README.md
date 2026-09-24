@@ -145,4 +145,3 @@ cover:
 _具体 front-matter 信息详见 `content.config.ts`._
 
 图集图片放在在 `public/content/cover/` 目录下, 命名格式为 `[servername]_[name].[png/jpg]`, 例如 `origin_pagoda.webp`, `rebuild_library.webp`.
-
