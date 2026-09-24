@@ -12,6 +12,7 @@
     "lint": "eslint",
     "fix": "eslint --fix"
   },
+  "packageManager": "pnpm@11.14.0",
   "dependencies": {
     "@nuxt/content": "^3.8.0",
     "@nuxt/eslint": "^1.9.0",
