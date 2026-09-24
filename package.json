@@ -8,6 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
+    "check": "tsc --noEmit",
     "lint": "eslint",
     "fix": "eslint --fix"
   },
