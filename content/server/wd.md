@@ -6,7 +6,7 @@ description: ""
 cover: "/content/server/cover_wd.webp"
 start: "2026-09-25"
 map: "www.arrowmc.top/neomap"
-index: 3
+index: 1
 address: 
   - "wayfare.hmomc.cn"
 ---
