@@ -1,5 +1,6 @@
 import * as net from "net"
 import { Buffer } from "buffer"
+import { od } from "@xtwis/ohday"
 
 function packVarInt(value: number): Buffer {
   const parts: number[] = []
@@ -54,7 +55,7 @@ export interface MinecraftStatus {
 }
 
 export async function pingMinecraftServer(host: string, port: number, timeout: number = 5000): Promise<MinecraftStatus> {
-  const startTime = Date.now()
+  const startTime = od().ts
   let socket: net.Socket | null = null
   let accumulatedData = Buffer.alloc(0)
   let expectedLength = -1
@@ -133,7 +134,7 @@ export async function pingMinecraftServer(host: string, port: number, timeout: n
         }
 
         const data = accumulatedData
-        const latency = Date.now() - startTime
+        const latency = od().ts - startTime
 
         // 1. 重新读取数据包长度 (VarInt)
         const { value: _packetLength, length: lengthLength } = readVarInt(data, 0)

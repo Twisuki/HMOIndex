@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { od } from "@xtwis/ohday"
+
 interface ServerCard {
   title: string
   intro: string
@@ -40,29 +42,9 @@ const isImgLoaded = ref<boolean[]>(
 )
 
 const getServerDays = (dateStr: string, asOf?: string) => {
-  const dateRegex = /^\d{4}-\d{2}-\d{2}$/
-  if (!dateRegex.test(dateStr)) {
-    throw new Error("格式错误!")
-  }
-  if (asOf !== undefined && !dateRegex.test(asOf)) {
-    throw new Error("格式错误!")
-  }
-
-  const date = new Date(dateStr)
-  const timestamp = date.getTime()
-
-  if (isNaN(timestamp)) throw new Error("日期不存在!")
-
-  const refDate = asOf ? new Date(asOf) : new Date()
-  const refTimestamp = refDate.getTime()
-
-  if (isNaN(refTimestamp)) throw new Error("日期不存在!")
-
-  const fromDay = new Date(date.getFullYear(), date.getMonth(), date.getDate())
-  const refDay = new Date(refDate.getFullYear(), refDate.getMonth(), refDate.getDate())
-
-  const diffInMs = refDay.getTime() - fromDay.getTime()
-  return Math.round(diffInMs / (1000 * 60 * 60 * 24))
+  const from = od(dateStr).cs("d")
+  const ref = (asOf !== undefined ? od(asOf) : od()).cs("d")
+  return ref.diff(from, "d")
 }
 
 const getServerDateMsg = (item: ServerCard) => {
