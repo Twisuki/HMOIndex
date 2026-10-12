@@ -99,7 +99,7 @@ index: "同日文章索引, 从1开始"
 title: "标题"
 description: "简介"
 cover: "封面路径(相对于 public 目录, 以 /content/dynamic/ 开头)"
-author: "作者"
+authors: "作者(字符串数组)"
 ```
 
 _具体 front-matter 信息详见 `content.config.ts`._
@@ -118,9 +118,10 @@ title: "服务器名称"
 intro: "服务器介绍"
 description: "正式的服务器简介"
 cover: "封面路径(相对于 public 目录, 以 /content/server/ 开头)"
-date: "开服时间"
-map: "网页地图网址"
-ip: "服务器ip"
+start: "开服日期"
+end: "完结日期(未完结留空, 已关服时填写)"
+map: "网页地图url(可空)"
+address: "服务器地址(字符串或字符串数组)"
 index: "展示顺序"
 ```
 
