@@ -5,6 +5,7 @@ intro: "当现代文明的辉煌隐去, 古典的回声响彻耳畔, ban生电�
 description: "湖大古典服是由 Minecraft 岳麓幻境社开设的 Paper 端类原版 Minecraft 服务器, 主要玩法为文明模拟. 服务端版本 1.21.4."
 cover: "/content/server/cover_classic.webp"
 start: "2025-04-03"
+end: "2026-10-10"
 map: "a.hmomc.cn:25571"
 index: 5
 address: 

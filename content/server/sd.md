@@ -5,6 +5,7 @@ intro: "肝不动复杂的整合包, 简单的mod + 原版体验更加适合你!
 description: ""
 cover: "/content/server/cover_sd.webp"
 start: "2025-08-29"
+end: "2026-10-10"
 map: "a.hmomc.cn:25585"
 index: 2
 address: 
