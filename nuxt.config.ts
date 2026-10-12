@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import defaultCoverHooks from "./hooks/default-cover"
+
 export default defineNuxtConfig({
   modules: [
     "@nuxtjs/color-mode",
@@ -10,4 +12,5 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],
   compatibilityDate: "2025-07-15",
+  hooks: defaultCoverHooks,
 })
