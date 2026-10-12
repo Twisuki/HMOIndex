@@ -5,6 +5,7 @@ intro: "你心中的大学是什么样子? 我想...复建属于我们的湖南�
 description: ""
 cover: "/content/server/cover_rebuild.webp"
 start: "2025-04-15"
+end: "2026-10-10"
 index: 8
 address:
   - "a.creative.hmomc.cn"

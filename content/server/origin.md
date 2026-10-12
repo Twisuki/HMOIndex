@@ -2,19 +2,17 @@
 name: "origin"
 title: "起源服"
 intro: "以生电, 建造玩法为核心, 生电佬交流中心, 社团重要线上活动举办地, 社团早期文化遗产圣地, 现已进入老年期."
-description: "湖大起源服是由 Minecraft 岳麓幻境社开设的 Purpur 端类原版 Minecraft 服务器, 主要玩法为生存与建筑, 服务端版本 1.21.1."
+description: "湖大起源服是由 Minecraft 岳麓幻境社开设的 Purpur 端类原版 Minecraft 服务器, 主要玩法为生存与建筑, 服务端版本 26.2."
 cover: "/content/server/cover_origin.webp"
 start: "2025-02-06"
-map: "a.hmomc.cn:25570"
-index: 1
+index: 2
 address: 
-  - "a.origin.hmomc.cn"
-  - "b.origin.hmomc.cn"
+  - "origin.hmomc.cn"
 ---
 
 ## 新人须知
 
-湖大起源服是由 Minecraft 岳麓幻境社开设的 `Purpur` 端类原版 Minecraft 服务器, 主要玩法为 **生存与建筑**, 服务端版本 `1.21.1`.
+湖大起源服是由 Minecraft 岳麓幻境社开设的 `Purpur` 端类原版 Minecraft 服务器, 主要玩法为 **生存与建筑**, 服务端版本 `26.2`.
 
 我们欢迎大家互相帮助, 交流与讨论.
 
@@ -26,11 +24,9 @@ address:
 >
 > 如果你在加入服务器过程中遇到了错误, 欢迎在群里发送截图, 崩溃报告等, 我们会维护一个服务器连接故障修复参考文档.
 
-1. 客户端: Java `1.21` 与 `1.21.1` 版本均可, 无指定模组需求.
-2. 登录方式: 仅支持正版验证, 请使用正版账号登录启动客户端.
-3. 加入服务器: 服务器地址详见内部文档.
-
-网页地图: [mc.hmomc.cn:25570](https://mc.hmomc.cn:25570)
+1. 客户端: Java `26.2` 版本, 无指定模组需求.
+2. 登录方式: 支持正版验证与MUA验证.
+3. 加入服务器: 服务器地址详见上文.
 
 > **遇到故障?**
 >
@@ -50,9 +46,7 @@ address:
 
 ```
 Purpur 插件：
-bluemap-5.7-spigot // 网页地图
 CommandAPI-10.0.1 // 印象里好像是假人的前置
-CoreProtect-CE-23.0-RC1b // 记录发生的事情（？
 EssentialsX-2.21.0 // 实用命令
 fakeplayer-0.3.13 // 假人
 GSit-2.2.1 // 动作
@@ -62,8 +56,6 @@ spark-1.10.119-bukkit // 分析性能
 tabtps-spigot-1.3.25 // 监测性能
 voicechat-bukkit-2.5.26 // 语音聊天
 
-MCDR 插件：
-PrimeBackup-v1.9.5 // 备份
 ```
 
 ### EssentialsX 实用命令
