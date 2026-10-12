@@ -3,7 +3,8 @@ interface ServerCard {
   title: string
   intro: string
   description: string
-  date: string
+  start: string
+  end: string | null
   cover: string
   path: string
 }
@@ -15,24 +16,35 @@ const { data: server } = await useAsyncData(() => {
       "title",
       "intro",
       "description",
-      "date",
+      "start",
+      "end",
       "cover",
       "path",
     )
     .all()
 })
 
-const serverItems = computed<ServerCard[]>(() =>
-  server.value as ServerCard[],
-)
+const serverItems = computed<ServerCard[]>(() => {
+  const items = (server.value as ServerCard[]) ?? []
+  // 已关服 (end 有值) 沉到列表末尾, 其余保持原 index 顺序
+  return [...items].sort((a, b) => {
+    const aClosed = a.end != null
+    const bClosed = b.end != null
+    if (aClosed === bClosed) return 0
+    return aClosed ? 1 : -1
+  })
+})
 
 const isImgLoaded = ref<boolean[]>(
   serverItems.value?.map((_item, index) => (index <= 1)) ?? [],
 )
 
-const getServerDays = (dateStr: string) => {
+const getServerDays = (dateStr: string, asOf?: string) => {
   const dateRegex = /^\d{4}-\d{2}-\d{2}$/
   if (!dateRegex.test(dateStr)) {
+    throw new Error("格式错误!")
+  }
+  if (asOf !== undefined && !dateRegex.test(asOf)) {
     throw new Error("格式错误!")
   }
 
@@ -41,12 +53,24 @@ const getServerDays = (dateStr: string) => {
 
   if (isNaN(timestamp)) throw new Error("日期不存在!")
 
-  const now = new Date()
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-  const todayTimestamp = today.getTime()
+  const refDate = asOf ? new Date(asOf) : new Date()
+  const refTimestamp = refDate.getTime()
 
-  const diffInMs = todayTimestamp - timestamp
+  if (isNaN(refTimestamp)) throw new Error("日期不存在!")
+
+  const fromDay = new Date(date.getFullYear(), date.getMonth(), date.getDate())
+  const refDay = new Date(refDate.getFullYear(), refDate.getMonth(), refDate.getDate())
+
+  const diffInMs = refDay.getTime() - fromDay.getTime()
   return Math.round(diffInMs / (1000 * 60 * 60 * 24))
+}
+
+const getServerDateMsg = (item: ServerCard) => {
+  if (!item.start) return ""
+  if (item.end) {
+    return `(开服 ${getServerDays(item.start, item.end)} 天, 已完结 ${getServerDays(item.end)} 天)`
+  }
+  return `(已开服 ${getServerDays(item.start)} 天)`
 }
 
 const handleScrolled = (scrlled: boolean, index: number) => {
@@ -91,16 +115,25 @@ const handleScrolled = (scrlled: boolean, index: number) => {
             >
             <div class="content">
               <div class="title">
-                {{ item.title }}
+                <span class="title-text">{{ item.title }}</span>
+                <span
+                  v-if="item.end"
+                  class="closed-pill"
+                >已完结</span>
               </div>
               <div class="intro">
                 {{ item.description || item.intro }}
               </div>
               <div class="date">
-                开服日期: {{ item.date || "--已不可考--" }}
-                <template v-if="item.date">
-                  (已开服 {{ getServerDays(item.date) }} 天)
-                </template>
+                <div class="date-line">
+                  开服日期: {{ item.start || "--已不可考--" }} {{ getServerDateMsg(item) }}
+                </div>
+                <div
+                  v-if="item.end"
+                  class="date-line"
+                >
+                  完结日期: {{ item.end }}
+                </div>
               </div>
             </div>
           </a>
@@ -159,8 +192,21 @@ const handleScrolled = (scrlled: boolean, index: number) => {
     justify-content: center;
 
     & .title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       font-size: var(--title-size);
       color: var(--text-light);
+    }
+
+    & .closed-pill {
+      padding: 0.1rem 0.6rem;
+      border-radius: 999px;
+      background: var(--bg-decoration);
+      color: var(--bg);
+      font-size: calc(var(--font-size) * 0.85);
+      font-weight: bold;
+      white-space: nowrap;
     }
 
     & .intro {
@@ -172,11 +218,14 @@ const handleScrolled = (scrlled: boolean, index: number) => {
     & .date {
       font-size: var(--font-size);
       color: var(--text-focus);
+      display: flex;
+      flex-direction: column;
+      gap: 0.125rem;
     }
   }
 
   &:hover {
-    & .title {
+    & .title-text {
       text-decoration: underline;
     }
   }
