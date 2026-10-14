@@ -1,6 +1,8 @@
-import { defineCachedEventHandler, getQuery } from "h3"
+import { getQuery } from "h3"
 import { resolveSrv, Resolver } from "node:dns/promises"
 import { pingMinecraftServer } from "../../utils/minecraftPinger"
+
+// defineCachedEventHandler 由 Nitro 在 server 上下文自动 import, 无需手动引入
 
 interface ServerQuery {
   host: string | string[]
