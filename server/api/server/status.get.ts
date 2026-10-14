@@ -1,4 +1,4 @@
-import { defineEventHandler, getQuery } from "h3"
+import { defineCachedEventHandler, getQuery } from "h3"
 import { resolveSrv, Resolver } from "node:dns/promises"
 import { pingMinecraftServer } from "../../utils/minecraftPinger"
 
@@ -6,6 +6,17 @@ interface ServerQuery {
   host: string | string[]
   port?: string
 }
+
+type PingResponse
+  = | {
+    players: {
+      online: number
+      max: number
+      onlinePlayers: { name: string, uuid: string }[]
+    }
+    description: { text: string }
+  }
+  | { error: string }
 
 async function getSingleServerStatus(hostAndPort: string, queryPort?: string) {
   const [host, portStr] = hostAndPort.split(":")
@@ -49,7 +60,9 @@ async function getSingleServerStatus(hostAndPort: string, queryPort?: string) {
   return await pingMinecraftServer(serverHost, serverPort)
 }
 
-export default defineEventHandler(async (event) => {
+// 60s 缓存: Minecraft 服务器状态不需要秒级实时, 同时缓解 Vercel serverless 冷启动
+// 默认使用 Nitro 的内存缓存(warm 函数内有效); 想要跨冷启动持久化, 可在 nitro.storage 里挂载 vercelKV 驱动
+export default defineCachedEventHandler(async (event): Promise<PingResponse> => {
   const query = getQuery<ServerQuery>(event)
   const hostParam = query.host
   const port = query.port
@@ -64,13 +77,14 @@ export default defineEventHandler(async (event) => {
   const hosts = Array.isArray(hostParam) ? hostParam : hostParam.split(",")
 
   let lastError = "All servers are offline"
+  let responseData: PingResponse | undefined
 
   // Try each host until one is online
   for (const host of hosts) {
     try {
       const status = await getSingleServerStatus(host.trim(), port)
       if (status.online) {
-        return {
+        responseData = {
           players: {
             online: status.current_players,
             max: status.max_players,
@@ -80,6 +94,7 @@ export default defineEventHandler(async (event) => {
             text: status.motd,
           },
         }
+        break
       }
       else {
         lastError = status.motd || lastError
@@ -90,7 +105,13 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  return {
-    error: lastError,
-  }
+  return responseData ?? { error: lastError }
+}, {
+  maxAge: 60,
+  name: "mc-server-status",
+  getKey: (event) => {
+    const q = getQuery<ServerQuery>(event)
+    const host = Array.isArray(q.host) ? q.host.join(",") : (q.host || "")
+    return `${host}:${q.port || ""}`
+  },
 })
